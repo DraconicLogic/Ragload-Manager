@@ -1,38 +1,23 @@
 .App {
-  text-align: center;
+	text-align: center;
+	display: grid;
+	grid-template-rows: 90vh auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.RagManagerUI {
+	grid-row: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#Navbar {
+	grid-row: 2;
+	justify-content: space-evenly;
+	display: flex;
+	list-style: none;
+	padding-inline-start: unset;
+	border-top: solid;
+	border-top-width: thin;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#AddRagload {
+	font-size: xx-large;
 }
