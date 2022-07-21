@@ -21,3 +21,15 @@
 #AddRagload {
 	font-size: xx-large;
 }
+
+#RagloadEntry__form {
+}
+
+#RagloadEntry__form > label {
+	display: block;
+	font-size: x-large;
+}
+
+#RagloadEntry__hideArrow {
+	font-size: xx-large;
+}
