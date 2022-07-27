@@ -13,26 +13,32 @@ function RagloadCard({ ragload }) {
 
 	function displayCard() {
 		return (
-			<tr onClick={toggleOptions}>
-				<td onClick={toggleOptions}>{ticketNumber}</td>
-				<td onClick={toggleOptions}>{vendor}</td>
-				<td onClick={toggleOptions}>{weight}</td>
-				<td onClick={toggleOptions}>{deliveryDate}</td>
+			<tr>
+				<td>{ticketNumber}</td>
+				<td>{vendor}</td>
+				<td>{weight}</td>
+				<td>{deliveryDate}</td>
+				<span onClick={toggleOptions} className="ragload-card__option-toggle">
+					‹
+				</span>
 			</tr>
 		);
 	}
 
 	function displayOptions() {
 		return (
-			<tr onClick={toggleOptions}>
+			<tr>
 				<td>
 					<button>Start Sorting</button>
 				</td>
-				<td onClick={toggleOptions}></td>
-				<td onClick={toggleOptions}></td>
+				<td> </td>
+				<td> </td>
 				<td>
 					<button>Delete</button>
 				</td>
+				<span onClick={toggleOptions} className="ragload-card__option-toggle">
+					›
+				</span>
 			</tr>
 		);
 	}
