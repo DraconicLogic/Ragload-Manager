@@ -1,4 +1,3 @@
-import { Ragload } from "../../types";
 import { useState } from "react";
 
 function RagloadCard({ ragload }) {
