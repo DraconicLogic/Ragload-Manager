@@ -5,15 +5,15 @@ import SortedRagloads from "../SortedRagloads/SortedRagloads.tsx";
 // @ts-ignore
 import RagloadEntry from "../RagloadEntry/RagloadEntry.tsx";
 
-function DisplayViewer({ screenState, handlers }) {
+function DisplayViewer({ ragloadState, screenState, handlers }) {
 	let display;
 	const { screen } = screenState;
 	switch (screen) {
 		case 0:
-			display = <DeliveredRagloads />;
+			display = <DeliveredRagloads ragloadState={ragloadState} />;
 			break;
 		case 1:
-			display = <SortedRagloads />;
+			display = <SortedRagloads ragloadState={ragloadState} />;
 			break;
 		case 2:
 			display = <RagloadEntry handlers={handlers} screenState={screenState} />;
@@ -21,12 +21,7 @@ function DisplayViewer({ screenState, handlers }) {
 		default:
 	}
 
-	return (
-		<div>
-			<h1>Display Viewer</h1>
-			{display}
-		</div>
-	);
+	return <div>{display}</div>;
 }
 
 export default DisplayViewer;

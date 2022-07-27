@@ -1,5 +1,5 @@
-function SortedRagloads() {
-	return <h1>SortedRagloads</h1>;
+function SortedRagloads({}) {
+	return <div></div>;
 }
 
 export default SortedRagloads;
