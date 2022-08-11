@@ -34,6 +34,15 @@
 	font-size: xx-large;
 }
 
+.ragload-card {
+	border: solid thin;
+}
+
 .ragload-card__option-toggle {
 	font-size: xx-large;
 }
+
+/* .table--information {
+	border-top: solid thin;
+	border-bottom: solid thin;
+} */

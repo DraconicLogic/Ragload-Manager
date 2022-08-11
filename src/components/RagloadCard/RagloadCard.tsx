@@ -7,24 +7,32 @@ function RagloadCard({ ragload, handleRagload }) {
 	function toggleOptions() {
 		setShowOptions(!showOptions);
 	}
+
 	// TODO: I need to handle all the options here then hand off to parent component handler
 	function handleOptions({ event, ragload }) {
 		// TODO: find option selected and pass to parent handler
 		console.log("event: ", event);
 		console.log("event target: ", event.target);
+		console.log("value: ", event.target.value);
 		console.log("ragload: ", ragload);
+
+		const options = {
+			action: event.target.value,
+			selectedRagload: ragload,
+		};
+		handleRagload(options);
 	}
 
 	function displayCard() {
 		return (
-			<tr>
+			<tr className="ragload-card">
 				<td>{ticketNumber}</td>
 				<td>{vendor}</td>
 				<td>{weight}</td>
 				<td>{deliveryDate}</td>
-				<span onClick={toggleOptions} className="ragload-card__option-toggle">
+				<td onClick={toggleOptions} className="ragload-card__option-toggle">
 					‹
-				</span>
+				</td>
 			</tr>
 		);
 	}
@@ -33,25 +41,31 @@ function RagloadCard({ ragload, handleRagload }) {
 
 	function displayOptions() {
 		return (
-			<tr>
+			<tr className="ragload-card">
 				<td>
-					<button onClick={(event) => handleOptions({ event, ragload })}>
+					<button
+						value={ragload.sortingStartDate ? "suspend" : "start"}
+						onClick={(event) => handleOptions({ event, ragload })}>
 						{ragload.sortingStartDate ? "Suspend Sorting" : "Start Sorting"}
 					</button>
 				</td>
 				<td>
-					<button onClick={(event) => handleOptions({ event, ragload })}>
+					<button
+						value="delete"
+						onClick={(event) => handleOptions({ event, ragload })}>
 						Delete
-					</button>{" "}
+					</button>
 				</td>
 				<td> </td>
 				{/*  */}
 				<td>
-					<button disabled={sortingStartedExpression}>Finish Sorting</button>
+					<button value="finish" disabled={sortingStartedExpression}>
+						Finish Sorting
+					</button>
 				</td>
-				<span onClick={toggleOptions} className="ragload-card__option-toggle">
+				<td onClick={toggleOptions} className="ragload-card__option-toggle">
 					›
-				</span>
+				</td>
 			</tr>
 		);
 	}

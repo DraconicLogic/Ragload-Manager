@@ -3,28 +3,63 @@ import { Ragload } from "../../types";
 import RagloadCard from "../RagloadCard/RagloadCard.tsx";
 
 function DeliveredRagloads({ ragloadState }) {
-	const { ragloads } = ragloadState;
+	const { ragloads, setRagloads } = ragloadState;
 
 	const rawMaterials = ragloads.filter((ragload: Ragload) => {
 		return !ragload.sortingStartDate && !ragload.sortedDate;
 	});
 
-	// change to activeProcessing
 	const currentlySorting = ragloads.filter((ragload: Ragload) => {
 		return ragload.sortingStartDate && !ragload.sortedDate;
 	});
 
+	// Since I'm using this function elsewhere perhaps I need to abstract it away??
 	function populateRagloads(ragloads) {
-		// Since I'm using this function elsewhere perhaps I need to abstract it away??
 		return ragloads
-			.map((ragload) => {
-				return <RagloadCard ragload={ragload} handleRagload={handleRagload} />;
+			.map((ragload, index) => {
+				return (
+					<RagloadCard
+						ragload={ragload}
+						handleRagload={handleRagload}
+						key={index}
+					/>
+				);
 			})
 			.reverse();
 	}
 
-	function handleRagload(ragload) {
-		console.log("Handled Ragload: ", ragload);
+	function handleRagload(ragloadObject) {
+		const { action, selectedRagload } = ragloadObject;
+		console.log("Handled Ragload: ", ragloadObject);
+		const newRagloads = [...ragloads];
+		console.log("newRagloads: ", newRagloads);
+
+		const ragloadIndex = newRagloads.findIndex((ragload) => {
+			console.log("Ragload find Index: ", ragload);
+			return ragload.ticketNumber === selectedRagload.ticketNumber;
+		});
+
+		// Move to "Sorting"
+		if (action === "start") {
+			newRagloads[ragloadIndex].sortingStartDate = new Date().toISOString();
+		}
+
+		// Delete Ragload
+		if (action === "delete") {
+			newRagloads.splice(ragloadIndex, 1);
+		}
+
+		// Return back to "Raw Materials"
+		if (action === "suspend") {
+			delete newRagloads[ragloadIndex].sortingStartDate;
+		}
+
+		// Finish ragload and move to Sorted component
+		if (action === "finish") {
+			newRagloads[ragloadIndex].sortedDate = new Date().toISOString();
+		}
+
+		setRagloads(newRagloads);
 	}
 
 	// function handleCurrentlySorting(ragload) {
@@ -51,7 +86,7 @@ function DeliveredRagloads({ ragloadState }) {
 				</thead>
 				<tbody id="delievered-ragloads__data">
 					<tr>
-						<td className="table--information">Sorting</td>{" "}
+						<td className="table--information">Sorting</td>
 					</tr>
 					{populateRagloads(currentlySorting)}
 					<tr>
