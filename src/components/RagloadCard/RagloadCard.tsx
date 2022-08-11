@@ -20,6 +20,7 @@ function RagloadCard({ ragload, handleRagload }) {
 			action: event.target.value,
 			selectedRagload: ragload,
 		};
+		console.log("HANDLING OPTIONS: ", options);
 		handleRagload(options);
 	}
 
@@ -59,7 +60,10 @@ function RagloadCard({ ragload, handleRagload }) {
 				<td> </td>
 				{/*  */}
 				<td>
-					<button value="finish" disabled={sortingStartedExpression}>
+					<button
+						value="finish"
+						disabled={sortingStartedExpression}
+						onClick={(event) => handleOptions({ event, ragload })}>
 						Finish Sorting
 					</button>
 				</td>

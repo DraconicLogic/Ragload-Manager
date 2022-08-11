@@ -12,6 +12,7 @@ function DeliveredRagloads({ ragloadState }) {
 	const currentlySorting = ragloads.filter((ragload: Ragload) => {
 		return ragload.sortingStartDate && !ragload.sortedDate;
 	});
+	console.log("currentProcessing: ", currentlySorting);
 
 	// Since I'm using this function elsewhere perhaps I need to abstract it away??
 	function populateRagloads(ragloads) {
@@ -56,6 +57,7 @@ function DeliveredRagloads({ ragloadState }) {
 
 		// Finish ragload and move to Sorted component
 		if (action === "finish") {
+			console.log("FINISH PROCESSING");
 			newRagloads[ragloadIndex].sortedDate = new Date().toISOString();
 		}
 
