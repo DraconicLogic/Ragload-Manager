@@ -1,3 +1,4 @@
+import React from "react";
 // @ts-ignore
 import DeliveredRagloads from "../DeliveredRagloads/DeliveredRagloads.tsx";
 // @ts-ignore
@@ -7,6 +8,7 @@ import RagloadEntry from "../RagloadEntry/RagloadEntry.tsx";
 
 function DisplayViewer({ ragloadState, screenState, handlers }) {
 	let display;
+
 	const { screen } = screenState;
 	switch (screen) {
 		case 0:

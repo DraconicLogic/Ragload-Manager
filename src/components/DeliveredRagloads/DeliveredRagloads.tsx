@@ -1,3 +1,4 @@
+import React from "react";
 import { Ragload } from "../../types";
 // @ts-ignore
 import RagloadCard from "../RagloadCard/RagloadCard.tsx";
