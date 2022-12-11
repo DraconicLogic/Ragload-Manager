@@ -1,13 +1,12 @@
-/**
- * I Want this screen when closed to return to the previous screen.
- */
-import { useState } from "react";
+// TODO: I Want this screen when closed to return to the previous screen.
+
+import * as React from "react";
 import { Ragload } from "../../types";
 
 function RagloadEntry({ handlers, screenState }) {
 	const { handleAddRagload } = handlers;
 	const { setScreen } = screenState;
-	const [currentRagload, setCurrentRagload] = useState<Ragload>({
+	const [currentRagload, setCurrentRagload] = React.useState<Ragload>({
 		vendor: "",
 		weight: 0,
 		ticketNumber: "",

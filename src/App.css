@@ -42,6 +42,20 @@
 	font-size: xx-large;
 }
 
+#sorted-ragloads__week-nav {
+	border: solid;
+	/* Remove border when element is finished */
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.sorted-ragloads__day-accordion {
+	border: solid;
+	/* Remove border when element is finished */
+	display: grid;
+	grid-template-columns: 20% 70% 10%;
+}
+
 /* .table--information {
 	border-top: solid thin;
 	border-bottom: solid thin;

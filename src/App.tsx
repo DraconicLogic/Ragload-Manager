@@ -6,11 +6,14 @@ import Navbar from "./components/Navbar/Navbar.tsx";
 // @ts-ignore
 import DisplayViewer from "./components/DisplayViewer/DisplayViewer.tsx";
 import { Ragload } from "./types";
-import tempTestData from "./tempTestData.json";
+
+// Test Data. Delete before pushihg to production
+// import tempTestData from "./tempTestData.json";
+import testData from "./testData.json";
 
 function App() {
 	const [screen, setScreen] = useState<Number>(0);
-	const [ragloads, setRagloads] = useState<Ragload[]>(tempTestData);
+	const [ragloads, setRagloads] = useState<Ragload[]>(testData);
 
 	function handleAddRagload(ragload: Ragload) {
 		console.log("Ragload Arg: ", ragload);
