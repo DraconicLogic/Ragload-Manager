@@ -1,15 +1,19 @@
 import React from "react";
 
-function WeekNav({ currentWeekState, weeklyRagloads }) {
+function WeekNavbar({ currentWeekState, weekRagloadsCollection }) {
 	const { currentWeekIndex, setCurrentWeekIndex } = currentWeekState;
 
-	function setWeekNavText(weekIndex, weekRagloads) {
-		/* TODO: this needs extending. I want it to return 
-			"Last week", "2 Weeks ago", "3 Weeks ago" etc...
-		*/
-
-		if (weekRagloads.length - 1 === weekIndex) {
+	function setWeekNavbarText(weekIndex, weekRagloads) {
+		const lastEntry = weekRagloads.length - 1;
+		const distanceFromCurrentWeek = lastEntry - weekIndex;
+		if (lastEntry === weekIndex) {
 			return "This week";
+		}
+		if (distanceFromCurrentWeek === 1) {
+			return "Last Week";
+		}
+		if (distanceFromCurrentWeek > 1) {
+			return `${distanceFromCurrentWeek} Weeks ago`;
 		}
 	}
 
@@ -22,7 +26,7 @@ function WeekNav({ currentWeekState, weeklyRagloads }) {
 
 	function handleRightClick(event) {
 		console.log("Event: ", event);
-		if (currentWeekIndex !== weeklyRagloads.length - 1) {
+		if (currentWeekIndex !== weekRagloadsCollection.length - 1) {
 			setCurrentWeekIndex(currentWeekIndex + 1);
 		}
 	}
@@ -34,7 +38,7 @@ function WeekNav({ currentWeekState, weeklyRagloads }) {
 				onClick={handleLeftClick}>
 				←
 			</div>
-			<div>{setWeekNavText(currentWeekIndex, weeklyRagloads)} </div>
+			<div>{setWeekNavbarText(currentWeekIndex, weekRagloadsCollection)} </div>
 			<div
 				className="sorted-ragloads__week-nav__navigator"
 				onClick={handleRightClick}>
@@ -44,4 +48,4 @@ function WeekNav({ currentWeekState, weeklyRagloads }) {
 	);
 }
 
-export default WeekNav;
+export default WeekNavbar;

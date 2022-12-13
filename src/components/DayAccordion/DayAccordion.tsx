@@ -1,7 +1,7 @@
 import React from "react";
 
 function DayAccordion({ day, ragloads }) {
-	const ragloadsWeight = ragloads[day].reduce((weight, ragload) => {
+	const ragloadsWeight = ragloads.reduce((weight, ragload) => {
 		return weight + ragload.weight;
 	}, 0);
 
