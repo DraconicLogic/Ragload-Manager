@@ -108,7 +108,7 @@ function DeliveredRagloads({ ragloadState }) {
 		// <div id="delivered-ragloads">
 		// 	<table>
 		// 		<caption>Delivered Ragloads</caption>
-		// 		<thead id="delievered-ragloads__headers">
+		// 		<thead id="delivered-ragloads__headers">
 		// 			<tr>
 		// 				<th>Ticket Number</th>
 		// 				<th>Vendor</th>
@@ -116,7 +116,7 @@ function DeliveredRagloads({ ragloadState }) {
 		// 				<th>Delivery Date</th>
 		// 			</tr>
 		// 		</thead>
-		// 		<tbody id="delievered-ragloads__data">
+		// 		<tbody id="delivered-ragloads__data">
 		// 			<tr>
 		// 				<td className="table--information">Sorting</td>
 		// 			</tr>

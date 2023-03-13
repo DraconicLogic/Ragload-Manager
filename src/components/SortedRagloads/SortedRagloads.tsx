@@ -35,7 +35,7 @@ function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 					wednesday: null,
 					thursday: null,
 					friday: null,
-					satuday: null,
+					saturday: null,
 					sunday: null,
 				},
 			};

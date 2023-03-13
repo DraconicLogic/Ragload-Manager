@@ -15,7 +15,7 @@ export interface WeekRagloads {
 		wednesday: Array<Ragload> | null;
 		thursday: Array<Ragload> | null;
 		friday: Array<Ragload> | null;
-		satuday: Array<Ragload> | null;
+		saturday: Array<Ragload> | null;
 		sunday: Array<Ragload> | null;
 	};
 }

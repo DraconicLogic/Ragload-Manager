@@ -9,7 +9,7 @@ import DisplayViewer from "./components/DisplayViewer/DisplayViewer.tsx";
 import * as data from "./data.ts";
 import { Ragload } from "./types";
 
-// Test Data. Delete before pushihg to production
+// Test Data. Delete before pushing to production
 // import tempTestData from "./tempTestData.json";
 import testData from "./testData.json";
 
