@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // @ts-ignore
 import Navbar from "./components/Navbar/Navbar.tsx";
 // @ts-ignore
@@ -15,15 +15,27 @@ import testData from "./testData.json";
 
 function App() {
 	const [screen, setScreen] = useState<Number>(0);
-	const [ragloads, setRagloads] = useState<Ragload[]>(testData);
+	const [ragloads, setRagloads] = useState<Ragload[]>([]);
 
+	function startUp() {
+		// Get Local data and put in state
+		const localRagloads = data.getLocalRagloads();
+		console.log("Local Ragloads before setState: ", localRagloads);
+		setRagloads(localRagloads);
+		console.log("Local Ragloads after setState: ", localRagloads);
+
+		// Get Cloud data and compare to local data. If cloud data newer than replace state and local data
+		const cloudRagloads = data.getCloudRagloads();
+		console.log("cloud ragload: ", cloudRagloads);
+	}
+	useEffect(startUp, []);
+
+	function updateRagloads() {}
 	function handleAddRagload(ragload: Ragload): void {
 		console.log("Ragload Arg: ", ragload, typeof ragload.weight);
 		const updatedRagloads = [...ragloads, ragload];
 		setRagloads(updatedRagloads);
 	}
-
-	function startUpApp() {}
 
 	return (
 		<div className="App">
