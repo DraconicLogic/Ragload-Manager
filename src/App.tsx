@@ -5,6 +5,8 @@ import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar.tsx";
 // @ts-ignore
 import DisplayViewer from "./components/DisplayViewer/DisplayViewer.tsx";
+// @ts-ignore
+import * as data from "./data.ts";
 import { Ragload } from "./types";
 
 // Test Data. Delete before pushihg to production
@@ -15,11 +17,13 @@ function App() {
 	const [screen, setScreen] = useState<Number>(0);
 	const [ragloads, setRagloads] = useState<Ragload[]>(testData);
 
-	function handleAddRagload(ragload: Ragload) {
-		console.log("Ragload Arg: ", ragload);
+	function handleAddRagload(ragload: Ragload): void {
+		console.log("Ragload Arg: ", ragload, typeof ragload.weight);
 		const updatedRagloads = [...ragloads, ragload];
 		setRagloads(updatedRagloads);
 	}
+
+	function startUpApp() {}
 
 	return (
 		<div className="App">

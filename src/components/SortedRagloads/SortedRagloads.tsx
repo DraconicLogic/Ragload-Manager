@@ -10,7 +10,7 @@ import WeekNavbar from "../WeekNavbar/WeekNavbar.tsx";
 import DayAccordion from "../DayAccordion/DayAccordion.tsx";
 dayjs.extend(weekOfYear);
 
-function formatRagloads(processedRagloads) {
+function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 	const weekRagloadObj = processedRagloads.reduce((ragloadWeekObj, ragload) => {
 		const ragloadWeekNumber = dayjs(ragload.sortedDate).week();
 		if (ragloadWeekObj[ragloadWeekNumber]) {
@@ -56,9 +56,8 @@ function formatRagloads(processedRagloads) {
 	return formattedWeekRagloads;
 }
 
-function renderDayAccordions(weekRagloads) {
+function renderDayAccordions(weekRagloads: WeekRagloads): DayAccordion {
 	const days = Object.entries(weekRagloads.ragloads);
-
 	return days.map((dayRagloads) => {
 		if (dayRagloads[1]) {
 			return <DayAccordion day={dayRagloads[0]} ragloads={dayRagloads[1]} />;
@@ -69,10 +68,7 @@ function renderDayAccordions(weekRagloads) {
 }
 
 function SortedRagloads({ ragloadState }) {
-	const {
-		ragloads,
-		// setRagloads
-	} = ragloadState;
+	const { ragloads } = ragloadState;
 
 	// What happens if there are no ragloads that have been sorted?
 	const processedRagloads: Array<Ragload> = ragloads.filter(
@@ -80,7 +76,9 @@ function SortedRagloads({ ragloadState }) {
 			return ragload.sortedDate;
 		}
 	);
-	const weekRagloadsCollection = formatRagloads(processedRagloads);
+	const weekRagloadsCollection: WeekRagloads[] =
+		formatRagloads(processedRagloads);
+	console.log("Formatted Ragloads: ", weekRagloadsCollection);
 	const [currentWeekIndex, setCurrentWeekIndex] = useState(
 		weekRagloadsCollection.length - 1
 	);
@@ -91,6 +89,7 @@ function SortedRagloads({ ragloadState }) {
 				currentWeekState={{ currentWeekIndex, setCurrentWeekIndex }}
 				weekRagloadsCollection={weekRagloadsCollection}
 			/>
+			{/* Element here to display date range and total weight for week */}
 			{renderDayAccordions(weekRagloadsCollection[currentWeekIndex])}
 		</div>
 	);

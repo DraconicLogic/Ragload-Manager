@@ -2,33 +2,40 @@ import React from "react";
 import { Ragload } from "../../types";
 // @ts-ignore
 import RagloadCard from "../RagloadCard/RagloadCard.tsx";
+// @ts-ignore
+import RagloadCardOptions from "../RagloadCardOptions/RagloadCardOptions.tsx";
+// @ts-ignore
+import RagloadTable from "../RagloadTable/RagloadTable.tsx";
 
 function DeliveredRagloads({ ragloadState }) {
 	const { ragloads, setRagloads } = ragloadState;
 
-	const rawMaterials = ragloads.filter((ragload: Ragload) => {
+	const rawMaterials: Ragload[] = ragloads.filter((ragload: Ragload) => {
 		return !ragload.sortingStartDate && !ragload.sortedDate;
 	});
 
-	const currentlySorting = ragloads.filter((ragload: Ragload) => {
+	const currentlySorting: Ragload[] = ragloads.filter((ragload: Ragload) => {
 		return ragload.sortingStartDate && !ragload.sortedDate;
 	});
 	console.log("currentProcessing: ", currentlySorting);
 
 	// Since I'm using this function elsewhere perhaps I need to abstract it away??
-	function populateRagloads(ragloads) {
-		return ragloads
-			.map((ragload, index) => {
-				return (
-					<RagloadCard
-						ragload={ragload}
-						handleRagload={handleRagload}
-						key={index}
-					/>
-				);
-			})
-			.reverse();
-	}
+	// function populateRagloads(ragloads: Ragload[]) {
+	// 	return ragloads
+	// 		.map((ragload, index) => {
+	// 			return (
+	// 				<RagloadCardOptions handleRagload={handleRagload}>
+	// 					<RagloadCard
+	// 						ragload={ragload}
+	// 						handleRagload={handleRagload}
+	// 						key={index}
+	// 					/>
+	// 				</RagloadCardOptions>
+	// 			);
+	// 		})
+	// 		.reverse();
+	// }
+	// populateRagloads() is a local function in RagloadTable.tsx. If This file is modified to use <RagloadTable/> then we can remove populateRagloads here.
 
 	function handleRagload(ragloadObject) {
 		const { action, selectedRagload } = ragloadObject;
@@ -74,34 +81,56 @@ function DeliveredRagloads({ ragloadState }) {
 	// 	console.log("newCurrentlySorting: ", newCurrentlySorting);
 	// 	setCurrentlySorting(newCurrentlySorting);
 	// }
-
+	const hasSortingEntries = currentlySorting.length > 0;
+	const hasRawMaterialsEntries = rawMaterials.length > 0;
 	return (
-		<div id="delivered-ragloads">
-			<table>
-				<caption>Delivered Ragloads</caption>
-				<thead id="delievered-ragloads__headers">
-					<tr>
-						<th>Ticket Number</th>
-						<th>Vendor</th>
-						<th>Weight(kg)</th>
-						<th>Delivery Date</th>
-					</tr>
-				</thead>
-				<tbody id="delievered-ragloads__data">
-					<tr>
-						<td className="table--information">Sorting</td>
-					</tr>
-					{populateRagloads(currentlySorting)}
-					<tr>
-						<td className="table--information">-</td>
-					</tr>
-					<tr>
-						<td className="table--information">Raw materials</td>
-					</tr>
-					{populateRagloads(rawMaterials)}
-				</tbody>
-			</table>
+		<div>
+			{!hasSortingEntries && !hasRawMaterialsEntries && (
+				<h2>Please add Ragload</h2>
+			)}
+			{hasSortingEntries && (
+				<React.Fragment>
+					<h2>Sorting</h2>
+					<RagloadTable
+						ragloads={currentlySorting}
+						handleRagload={handleRagload}
+					/>
+				</React.Fragment>
+			)}
+			<br />
+			{hasRawMaterialsEntries && (
+				<React.Fragment>
+					<h2>RawMaterials</h2>
+					<RagloadTable ragloads={rawMaterials} handleRagload={handleRagload} />
+				</React.Fragment>
+			)}
 		</div>
+		// <div id="delivered-ragloads">
+		// 	<table>
+		// 		<caption>Delivered Ragloads</caption>
+		// 		<thead id="delievered-ragloads__headers">
+		// 			<tr>
+		// 				<th>Ticket Number</th>
+		// 				<th>Vendor</th>
+		// 				<th>Weight(kg)</th>
+		// 				<th>Delivery Date</th>
+		// 			</tr>
+		// 		</thead>
+		// 		<tbody id="delievered-ragloads__data">
+		// 			<tr>
+		// 				<td className="table--information">Sorting</td>
+		// 			</tr>
+		// 			{populateRagloads(currentlySorting)}
+		// 			<tr>
+		// 				<td className="table--information">-</td>
+		// 			</tr>
+		// 			<tr>
+		// 				<td className="table--information">Raw materials</td>
+		// 			</tr>
+		// 			{populateRagloads(rawMaterials)}
+		// 		</tbody>
+		// 	</table>
+		// </div>
 	);
 }
 

@@ -20,12 +20,21 @@ function RagloadEntry({ handlers, screenState }) {
 			...currentRagload,
 		};
 
+		console.log(currentRagload);
+
 		newRagload[name] = value;
 		setCurrentRagload(newRagload);
 	}
 
 	function handleSubmit(event) {
 		event.preventDefault();
+		currentRagload.weight = Number(currentRagload.weight);
+
+		console.log(
+			"Current Ragload Weight: ",
+			currentRagload.weight,
+			typeof currentRagload.weight
+		);
 		handleAddRagload(currentRagload);
 		setScreen(0);
 	}

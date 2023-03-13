@@ -1,3 +1,5 @@
+const dayjs = require("dayjs");
+
 export function parseDate(dateString: string) {
 	return dateString.toLocaleString();
 }
@@ -15,4 +17,8 @@ export function getDay(date: string): string {
 		6: "saturday",
 	};
 	return dayObject[day];
+}
+
+export function formatISOString(date: string): string {
+	return dayjs(date).format("HH:mm DD/MM/YYYY");
 }
