@@ -9,6 +9,7 @@ import RagloadTable from "../RagloadTable/RagloadTable.tsx";
 
 function DeliveredRagloads({ ragloadState }) {
 	const { ragloads, setRagloads } = ragloadState;
+	console.log(ragloads);
 
 	const rawMaterials: Ragload[] = ragloads.filter((ragload: Ragload) => {
 		return !ragload.sortingStartDate && !ragload.sortedDate;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Ragload, WeekRagloads } from "../../types";
-import * as dayjs from "dayjs";
-import * as weekOfYear from "dayjs/plugin/weekOfYear";
+import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear";
 //@ts-ignore
 import * as utils from "../../utils.ts";
 // @ts-ignore
@@ -76,6 +76,9 @@ function SortedRagloads({ ragloadState }) {
 			return ragload.sortedDate;
 		}
 	);
+	const isRagloadsEmpty = !(processedRagloads.length > 0);
+	console.log("isRagloadsEmpty: ", isRagloadsEmpty);
+
 	const weekRagloadsCollection: WeekRagloads[] =
 		formatRagloads(processedRagloads);
 	console.log("Formatted Ragloads: ", weekRagloadsCollection);
@@ -90,7 +93,12 @@ function SortedRagloads({ ragloadState }) {
 				weekRagloadsCollection={weekRagloadsCollection}
 			/>
 			{/* Element here to display date range and total weight for week */}
-			{renderDayAccordions(weekRagloadsCollection[currentWeekIndex])}
+
+			{isRagloadsEmpty ? (
+				<h2>Please add Ragload</h2>
+			) : (
+				renderDayAccordions(weekRagloadsCollection[currentWeekIndex])
+			)}
 		</div>
 	);
 }
