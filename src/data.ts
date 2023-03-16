@@ -1,21 +1,15 @@
+import { Ragload } from "./types";
+
 export function getLocalRagloads() {
-	console.log("Getting local data");
-	const localData = localStorage.getItem("ragloads");
-	console.log("LocalStorage Data: ", localData);
-	if (localData) {
-		return JSON.parse(localData);
-	} else {
-		return localData;
-	}
+	const localData: Ragload[] = JSON.parse(localStorage.getItem("ragloads"));
+	return localData;
 }
 
-export function saveLocalRagloads(ragloads) {
-	console.log("Saving Local data");
-	console.log("input: ", ragloads);
+export function saveLocalRagloads(ragloads: Ragload[]) {
 	localStorage.setItem("ragloads", JSON.stringify(ragloads));
 }
 
 export function getCloudRagloads() {
-	console.log("Getting Cloud data");
+	// console.log("Getting Cloud data");
 	return null;
 }
