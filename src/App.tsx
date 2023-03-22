@@ -19,6 +19,7 @@ function App() {
 			const ragloadsHasEntries = localRagloads.length > 0;
 			if (ragloadsHasEntries) setRagloads(localRagloads);
 		})();
+
 		// (function cloudSync(){
 		// 	const cloudRagloads: Ragload[] = data.getCloudRagloads();
 		// })()

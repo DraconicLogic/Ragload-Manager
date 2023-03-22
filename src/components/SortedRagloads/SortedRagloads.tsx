@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Ragload, WeekRagloads } from "../../types";
-import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear";
 //@ts-ignore
 import * as utils from "../../utils.ts";
 // @ts-ignore
 import WeekNavbar from "../WeekNavbar/WeekNavbar.tsx";
 // @ts-ignore
 import DayAccordion from "../DayAccordion/DayAccordion.tsx";
-dayjs.extend(weekOfYear);
 
 function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 	const weekRagloadObj = processedRagloads.reduce((ragloadWeekObj, ragload) => {
-		const ragloadWeekNumber = dayjs(ragload.sortedDate).week();
+		const ragloadWeekNumber: number = utils.getWeekNumber(ragload.sortedDate);
 		if (ragloadWeekObj[ragloadWeekNumber]) {
 			ragloadWeekObj[ragloadWeekNumber].push(ragload);
 		} else {
@@ -25,8 +22,9 @@ function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 	const weekRagloadTuple = Object.entries(weekRagloadObj);
 	console.log("Ragload Week Tuple: ", weekRagloadTuple);
 
-	const formattedWeekRagloads = weekRagloadTuple.reduce(
-		(weeks: any, ragloads: any) => {
+	const formattedWeekRagloads: WeekRagloads[] = weekRagloadTuple.reduce(
+		// Try to assign type to ragloads param
+		(weeks: WeekRagloads[], ragloads: any) => {
 			const newWeek: WeekRagloads = {
 				weekNumber: Number(ragloads[0]),
 				ragloads: {
@@ -52,8 +50,7 @@ function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 		},
 		[]
 	);
-	console.log("Formatted Ragloads: ", formattedWeekRagloads);
-	return formattedWeekRagloads;
+	return utils.sortWeekRagloadsByDate(formattedWeekRagloads);
 }
 
 function renderDayAccordions(weekRagloads: WeekRagloads): DayAccordion {
@@ -70,25 +67,27 @@ function renderDayAccordions(weekRagloads: WeekRagloads): DayAccordion {
 function SortedRagloads({ ragloadState }) {
 	const { ragloads } = ragloadState;
 
-	// What happens if there are no ragloads that have been sorted?
 	const processedRagloads: Array<Ragload> = ragloads.filter(
 		(ragload: Ragload) => {
 			return ragload.sortedDate;
 		}
 	);
-	const isRagloadsEmpty = !(processedRagloads.length > 0);
-	console.log("isRagloadsEmpty: ", isRagloadsEmpty);
+	const isRagloadsEmpty: boolean = !(processedRagloads.length > 0);
 
+	// Need to organize weekRagloads in true historical order.
 	const weekRagloadsCollection: WeekRagloads[] =
 		formatRagloads(processedRagloads);
 	console.log("Formatted Ragloads: ", weekRagloadsCollection);
-	const [currentWeekIndex, setCurrentWeekIndex] = useState(
+	const [currentWeekIndex, setCurrentWeekIndex] = useState<number>(
 		weekRagloadsCollection.length - 1
 	);
+	const currentWeek: number = utils.getWeekNumber(new Date().toISOString());
+	console.log("currentWeek: ", currentWeek);
 
 	return (
 		<div id="sorted-ragloads">
 			<WeekNavbar
+				currentWeek={currentWeek}
 				currentWeekState={{ currentWeekIndex, setCurrentWeekIndex }}
 				weekRagloadsCollection={weekRagloadsCollection}
 			/>

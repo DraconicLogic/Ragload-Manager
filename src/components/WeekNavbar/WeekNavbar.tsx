@@ -1,21 +1,47 @@
 import React from "react";
 import { Ragload, WeekRagloads } from "../../types";
 
-function setWeekNavbarText(weekIndex, weekRagloads) {
-	console.log("weekIndex: ", weekIndex);
-	console.log("weekRagloads: ", weekRagloads);
+function setWeekNavbarText({
+	currentWeek,
+	currentWeekIndex,
+	weekRagloadsCollection,
+}) {
+	console.log("currentWeek: ", currentWeek);
+	console.log("weekIndex: ", currentWeekIndex);
+	console.log("weekRagloads: ", weekRagloadsCollection);
 	// TODO: Needs more detail. If we skip a week I don't want week before(latest entry) to be labeled "this week."
-	const lastEntry = weekRagloads.length - 1;
-	const distanceFromCurrentWeek = lastEntry - weekIndex;
-	if (lastEntry === weekIndex) {
-		return "This week";
+
+	const lastEntry = weekRagloadsCollection.length - 1;
+	const currentRagloadsWeekNumber =
+		weekRagloadsCollection[currentWeekIndex].weekNumber;
+	// week ragload collection is in date order. if the current week is larger than week number of WeekRagloads just subtract from current week to get weeks past.
+	if (currentWeek > currentRagloadsWeekNumber) {
+		if (currentRagloadsWeekNumber === currentWeek) {
+			return "This week";
+		}
+		if (currentWeek - currentRagloadsWeekNumber === 1) {
+			return "Last Week";
+		}
+		if (currentWeek - currentRagloadsWeekNumber > 1) {
+			return `${currentWeek - currentRagloadsWeekNumber} Weeks ago`;
+		}
 	}
-	if (distanceFromCurrentWeek === 1) {
-		return "Last Week";
+	if (currentWeek < currentRagloadsWeekNumber) {
+		return `Last Year`;
 	}
-	if (distanceFromCurrentWeek > 1) {
-		return `${distanceFromCurrentWeek} Weeks ago`;
-	}
+
+	// if week number is larger then just say last year in month gathered(processed)
+	// const distanceFromCurrentWeek = lastEntry - currentWeekIndex;
+
+	// if (lastEntry === currentWeekIndex) {
+	// 	return "This week";
+	// }
+	// if (distanceFromCurrentWeek === 1) {
+	// 	return "Last Week";
+	// }
+	// if (distanceFromCurrentWeek > 1) {
+	// 	return `${distanceFromCurrentWeek} Weeks ago`;
+	// }
 }
 
 function displayDateRange(weekRagloads: WeekRagloads) {
@@ -42,7 +68,7 @@ function displayDateRange(weekRagloads: WeekRagloads) {
 	// })
 }
 
-function WeekNavbar({ currentWeekState, weekRagloadsCollection }) {
+function WeekNavbar({ currentWeek, currentWeekState, weekRagloadsCollection }) {
 	const { currentWeekIndex, setCurrentWeekIndex } = currentWeekState;
 
 	function handleLeftClick(event) {
@@ -67,7 +93,13 @@ function WeekNavbar({ currentWeekState, weekRagloadsCollection }) {
 				←
 			</div>
 			<div className="sorted-ragloads__week-nav__text">
-				<div>{setWeekNavbarText(currentWeekIndex, weekRagloadsCollection)}</div>
+				<div>
+					{setWeekNavbarText({
+						currentWeek,
+						currentWeekIndex,
+						weekRagloadsCollection,
+					})}
+				</div>
 				<div>
 					{/* {displayDateRange(weekRagloadsCollection[currentWeekIndex])} */}
 					displayDateRange
