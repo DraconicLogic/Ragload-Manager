@@ -9,13 +9,15 @@ export interface Ragload {
 
 export interface WeekRagloads {
 	weekNumber: number;
-	ragloads: {
-		monday: Array<Ragload> | null;
-		tuesday: Array<Ragload> | null;
-		wednesday: Array<Ragload> | null;
-		thursday: Array<Ragload> | null;
-		friday: Array<Ragload> | null;
-		saturday: Array<Ragload> | null;
-		sunday: Array<Ragload> | null;
-	};
+	ragloads: RagloadDays;
+}
+
+export interface RagloadDays {
+	monday: Array<Ragload> | null;
+	tuesday: Array<Ragload> | null;
+	wednesday: Array<Ragload> | null;
+	thursday: Array<Ragload> | null;
+	friday: Array<Ragload> | null;
+	saturday: Array<Ragload> | null;
+	sunday: Array<Ragload> | null;
 }

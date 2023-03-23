@@ -1,5 +1,5 @@
 import weekOfYear from "dayjs/plugin/weekOfYear";
-import { WeekRagloads } from "./types";
+import { WeekRagloads, RagloadDays } from "./types";
 const dayjs = require("dayjs");
 dayjs.extend(weekOfYear);
 
@@ -54,18 +54,63 @@ export function sortWeekRagloadsByDate(weekRagloadsCollection: WeekRagloads[]) {
 	return newWeekRagloadsCollection;
 }
 
-export function getProcessedDateRange(weekRagload: WeekRagloads) {
-	const { ragloads } = weekRagload;
+// Refactor this ugly shit ASAP
+export function getProcessedDateRange(ragloadDays: RagloadDays) {
 	const range = {
 		from: "",
 		to: "",
 	};
-	if (ragloads.monday && ragloads.friday) {
-		range.from = ragloads.monday[0].sortedDate;
-		range.to = ragloads.friday[0].sortedDate;
-	} else if (ragloads.tuesday) {
-		const monday = dayjs(ragloads.tuesday[0].sortedDate)
+	if (ragloadDays.monday && ragloadDays.sunday) {
+		range.from = ragloadDays.monday[0].sortedDate;
+		range.to = ragloadDays.sunday[0].sortedDate;
+	} else if (ragloadDays.tuesday) {
+		const monday = dayjs(ragloadDays.tuesday[0].sortedDate)
 			.subtract(1, "day")
 			.toString();
+		const sunday = dayjs(monday).add(6, "day").toString();
+		range.from = monday;
+		range.to = sunday;
+	} else if (ragloadDays.wednesday) {
+		const monday = dayjs(ragloadDays.wednesday[0].sortedDate)
+			.subtract(2, "day")
+			.toString();
+		const sunday = dayjs(monday).add(6, "day").toString();
+		range.from = monday;
+		range.to = sunday;
+	} else if (ragloadDays.thursday) {
+		const monday = dayjs(ragloadDays.thursday[0].sortedDate)
+			.subtract(3, "day")
+			.toString();
+		const sunday = dayjs(monday).add(6, "day").toString();
+		range.from = monday;
+		range.to = sunday;
+	} else if (ragloadDays.friday) {
+		const monday = dayjs(ragloadDays.friday[0].sortedDate)
+			.subtract(4, "day")
+			.toString();
+		const sunday = dayjs(monday).add(6, "day").toString();
+		range.from = monday;
+		range.to = sunday;
+	} else if (ragloadDays.saturday) {
+		const monday = dayjs(ragloadDays.saturday[0].sortedDate)
+			.subtract(5, "day")
+			.toString();
+		const sunday = dayjs(monday).add(6, "day").toString();
+		range.from = monday;
+		range.to = sunday;
+	} else if (ragloadDays.sunday) {
+		const monday = dayjs(ragloadDays.sunday[0].sortedDate)
+			.subtract(6, "day")
+			.toString();
+
+		range.from = monday;
+		range.to = ragloadDays.sunday[0].sortedDate;
+	} else if (ragloadDays.monday) {
+		const sunday = dayjs(ragloadDays.monday[0].sortedDate)
+			.add(6, "day")
+			.toString();
+		range.from = ragloadDays.monday[0].sortedDate;
+		range.to = sunday;
 	}
+	return range;
 }
