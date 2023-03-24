@@ -1,5 +1,6 @@
 import React from "react";
 import { Ragload, WeekRagloads } from "../../types";
+import { getYear } from "../../utils";
 
 function setWeekNavbarText({
 	currentWeek,
@@ -84,6 +85,8 @@ function WeekNavbar({ currentWeek, currentWeekState, weekRagloadsCollection }) {
 			setCurrentWeekIndex(currentWeekIndex + 1);
 		}
 	}
+	const { from, to } = weekRagloadsCollection[currentWeekIndex].range;
+	// const { year } = weekRagloadsCollection[currentWeekIndex].year;
 
 	return (
 		<div id="sorted-ragloads__week-nav">
@@ -94,16 +97,15 @@ function WeekNavbar({ currentWeek, currentWeekState, weekRagloadsCollection }) {
 			</div>
 			<div className="sorted-ragloads__week-nav__text">
 				<div>
-					{setWeekNavbarText({
+					Week {weekRagloadsCollection[currentWeekIndex].weekNumber}
+					{/* {setWeekNavbarText({
 						currentWeek,
 						currentWeekIndex,
 						weekRagloadsCollection,
-					})}
+					})} */}
 				</div>
-				<div>
-					{/* {displayDateRange(weekRagloadsCollection[currentWeekIndex])} */}
-					displayDateRange
-				</div>
+				<div>{`${from} - ${to} `}</div>
+				{/* <div>{year}</div> */}
 			</div>
 			<div
 				className="sorted-ragloads__week-nav__navigator"

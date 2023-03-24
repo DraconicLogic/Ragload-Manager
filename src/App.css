@@ -56,7 +56,7 @@
 
 .sorted-ragloads__week-nav__text {
 	display: grid;
-	grid-template-rows: repeat(2, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 }
 
 .sorted-ragloads__day-accordion {

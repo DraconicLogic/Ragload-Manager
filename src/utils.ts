@@ -112,5 +112,12 @@ export function getProcessedDateRange(ragloadDays: RagloadDays) {
 		range.from = ragloadDays.monday[0].sortedDate;
 		range.to = sunday;
 	}
+
+	range.from = dayjs(range.from).format("DD/MM");
+	range.to = dayjs(range.to).format("DD/MM");
 	return range;
+}
+
+export function getYear(date) {
+	return dayjs(date).year();
 }

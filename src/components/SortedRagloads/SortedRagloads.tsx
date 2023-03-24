@@ -6,6 +6,7 @@ import * as utils from "../../utils.ts";
 import WeekNavbar from "../WeekNavbar/WeekNavbar.tsx";
 // @ts-ignore
 import DayAccordion from "../DayAccordion/DayAccordion.tsx";
+import { getProcessedDateRange, getYear } from "../../utils";
 
 function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 	const weekRagloadObj = processedRagloads.reduce((ragloadWeekObj, ragload) => {
@@ -36,6 +37,8 @@ function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 					saturday: null,
 					sunday: null,
 				},
+				range: null,
+				year: null,
 			};
 			ragloads[1].forEach((ragload: Ragload) => {
 				const day = utils.getDay(ragload.sortedDate);
@@ -50,6 +53,19 @@ function formatRagloads(processedRagloads: Ragload[]): WeekRagloads[] {
 		},
 		[]
 	);
+	formattedWeekRagloads.forEach((weekRagload: WeekRagloads) => {
+		weekRagload.range = getProcessedDateRange(weekRagload.ragloads);
+
+		// TODO: When getProcessedDateRange() has be refactored extract logic that checks ragloads for entries. Use it when implementing the get year
+		// weekRagload.year = getYear(
+		// 	Object.values(weekRagload.ragloads).find((array) => {
+		// 		if (array[0]) {
+		// 			return array[0].sortedDate;
+		// 		}
+		// 	})
+		// );
+	});
+
 	return utils.sortWeekRagloadsByDate(formattedWeekRagloads);
 }
 
