@@ -34,6 +34,7 @@ export function sortWeekRagloadsByDate(weekRagloadsCollection: WeekRagloads[]) {
 	const newWeekRagloadsCollection: WeekRagloads[] = [...weekRagloadsCollection];
 	newWeekRagloadsCollection.sort((a, b): any => {
 		const weekRagloadsDateA = Object.values(a.ragloads).find((ragloadDay) => {
+			// Do I need to check for ragloadDay?
 			if (ragloadDay) {
 				return ragloadDay[0].sortedDate;
 			}
@@ -118,6 +119,17 @@ export function getProcessedDateRange(ragloadDays: RagloadDays) {
 	return range;
 }
 
-export function getYear(date) {
-	return dayjs(date).year();
-}
+// export function getProcessedWeekRagloadYear(ragloadDays: RagloadDays):string {
+
+// 	const yearsObject = Object.values(ragloadDays)
+// 		.filter((ragloads) => ragloads)
+// 		.reduce((years, ragloads) => {
+// 			const ragloadYear = dayjs(ragloads.sortedDate).year()
+// 			if(!years[ragloadYear]) {
+// 				years[ragloadYear] = ragloadYear
+// 			}
+// 			return years
+// 		}, {})
+// 	const yearString =
+// 	return dayjs(date).year();
+// }

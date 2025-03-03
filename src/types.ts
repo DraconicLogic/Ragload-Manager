@@ -10,11 +10,11 @@ export interface Ragload {
 export interface WeekRagloads {
 	weekNumber: number;
 	ragloads: RagloadDays;
-	range: {
+	range?: {
 		from: string;
 		to: string;
 	} | null;
-	year: string | null;
+	year?: string;
 }
 
 export interface RagloadDays {
