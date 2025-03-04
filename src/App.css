@@ -28,7 +28,6 @@
 }
 
 #month-view__current-month-bar {
-	/* temporary attribute */
 	align-self: center;
 }
 
@@ -44,7 +43,6 @@
 }
 
 #month-view__current-day-bar {
-	/* temporary attribute */
 	align-self: center;
 }
 
@@ -55,7 +53,6 @@
 }
 
 #month-view__tool-bar {
-	/* temporary attribute */
 	align-self: center;
 }
 
