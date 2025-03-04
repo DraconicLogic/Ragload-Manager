@@ -5,6 +5,8 @@ import DeliveredRagloads from "../DeliveredRagloads/DeliveredRagloads.tsx";
 import SortedRagloads from "../SortedRagloads/SortedRagloads.tsx";
 // @ts-ignore
 import RagloadEntry from "../RagloadEntry/RagloadEntry.tsx";
+// @ts-ignore
+import MonthView from "../../screens/MonthView/MonthView";
 
 function DisplayViewer({ ragloadState, screenState, handlers }) {
 	let display;
@@ -12,7 +14,10 @@ function DisplayViewer({ ragloadState, screenState, handlers }) {
 	const { screen } = screenState;
 	switch (screen) {
 		case 0:
-			display = <DeliveredRagloads ragloadState={ragloadState} />;
+			// display = <DeliveredRagloads ragloadState={ragloadState} />;
+			display = (
+				<MonthView ragloadState={ragloadState} screenState={screenState} />
+			);
 			break;
 		case 1:
 			display = <SortedRagloads ragloadState={ragloadState} />;

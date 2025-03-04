@@ -22,6 +22,43 @@
 	font-size: xx-large;
 }
 
+#month-view {
+	display: grid;
+	grid-template-rows: 1fr 3fr 1fr 3fr 1fr;
+}
+
+#month-view__current-month-bar {
+	/* temporary attribute */
+	align-self: center;
+}
+
+#current-month-bar {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+#month-view__calendar-month {
+	border: solid thin;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#month-view__current-day-bar {
+	/* temporary attribute */
+	align-self: center;
+}
+
+#month-view__ragload-table {
+	border: solid thin;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#month-view__tool-bar {
+	/* temporary attribute */
+	align-self: center;
+}
+
 #RagloadEntry__form {
 }
 
