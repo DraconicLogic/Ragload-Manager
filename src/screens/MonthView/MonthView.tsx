@@ -4,6 +4,7 @@ import { Ragload } from "../../types";
 import Calendar from "react-calendar";
 import RagloadTable from "../../components/RagloadTable/RagloadTable";
 import CurrentMonthBar from "../../components/CurrentMonthBar/CurrentMonthBar";
+import CurrentDayBar from "../../components/CurrentDayBar/CurrentDayBar";
 // @ts-ignore
 
 function MonthView({ ragloadState, screenState }) {
@@ -18,11 +19,13 @@ function MonthView({ ragloadState, screenState }) {
 			<div id="month-view__calendar-month">
 				<Calendar />
 			</div>
-			<div id="month-view__current-day-bar">current day bar</div>
+			<div id="month-view__current-day-bar">
+				<CurrentDayBar />
+			</div>
 			<div id="month-view__ragload-table">
 				<RagloadTable ragloads={ragloads} handleRagload={null} />
 			</div>
-			<div id="month-view__tool-bar">tool bar</div>
+			<div id="month-view__tool-bar">&#128269</div>
 		</div>
 	);
 }

@@ -1,7 +1,14 @@
 .App {
 	text-align: center;
-	display: grid;
-	grid-template-rows: 90vh auto;
+	/* display: grid;
+	grid-template-rows: 90vh auto; */
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .RagManagerUI {
@@ -24,7 +31,7 @@
 
 #month-view {
 	display: grid;
-	grid-template-rows: 1fr 3fr 1fr 3fr 1fr;
+	grid-template-rows: 1fr 3fr 1fr 5fr 1fr;
 }
 
 #month-view__current-month-bar {
@@ -44,6 +51,11 @@
 
 #month-view__current-day-bar {
 	align-self: center;
+}
+
+#current-day-bar {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 }
 
 #month-view__ragload-table {

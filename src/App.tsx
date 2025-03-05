@@ -46,7 +46,7 @@ function App() {
 				ragloadState={{ ragloads, setRagloads }}
 				handlers={{ handleAddRagload }}
 			/>
-			<Navbar screenState={{ screen, setScreen }} />
+			{/* <Navbar screenState={{ screen, setScreen }} /> */}
 		</div>
 	);
 }
