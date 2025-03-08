@@ -126,6 +126,23 @@
 	text-transform: capitalize;
 }
 
+#year-view {
+	display: grid;
+	grid-template-rows: 1fr 8fr 1fr;
+}
+
+#year-view__current-year-bar {
+	border: thin;
+}
+
+#year-view__month-cards {
+	border: dashed;
+}
+
+#year-view__tool-bar {
+	border: dotted;
+}
+
 /* .table--information {
 	border-top: solid thin;
 	border-bottom: solid thin;
