@@ -68,6 +68,15 @@
 	align-self: center;
 }
 
+#tool-bar {
+	justify-content: space-evenly;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+#tool-bar__add {
+}
+
 #RagloadEntry__form {
 }
 
