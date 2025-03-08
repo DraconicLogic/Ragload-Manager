@@ -6,7 +6,9 @@ import SortedRagloads from "../SortedRagloads/SortedRagloads.tsx";
 // @ts-ignore
 import RagloadEntry from "../RagloadEntry/RagloadEntry.tsx";
 // @ts-ignore
-import MonthView from "../../screens/MonthView/MonthView";
+import MonthView from "../../views/MonthView/MonthView";
+// @ts-ignore
+import YearView from "../../views/YearView/YearView";
 
 function DisplayViewer({ ragloadState, screenState, handlers }) {
 	let display;
@@ -14,13 +16,14 @@ function DisplayViewer({ ragloadState, screenState, handlers }) {
 	const { screen } = screenState;
 	switch (screen) {
 		case 0:
-			// display = <DeliveredRagloads ragloadState={ragloadState} />;
 			display = (
 				<MonthView ragloadState={ragloadState} screenState={screenState} />
 			);
 			break;
 		case 1:
-			display = <SortedRagloads ragloadState={ragloadState} />;
+			display = (
+				<YearView ragloadState={ragloadState} screenState={screenState} />
+			);
 			break;
 		case 2:
 			display = <RagloadEntry handlers={handlers} screenState={screenState} />;

@@ -15,7 +15,7 @@ function MonthView({ ragloadState, screenState }) {
 	return (
 		<div id="month-view">
 			<div id="month-view__current-month-bar">
-				<CurrentMonthBar />
+				<CurrentMonthBar screenState={{ screen, setScreen }} />
 			</div>
 			<div id="month-view__calendar-month">
 				<Calendar />
