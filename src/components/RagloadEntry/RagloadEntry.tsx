@@ -3,9 +3,8 @@
 import * as React from "react";
 import { Ragload } from "../../types";
 
-function RagloadEntry({ handlers, screenState }) {
-	const { handleAddRagload } = handlers;
-	const { setScreen } = screenState;
+function RagloadEntry({ handlers }) {
+	const { handleAddRagload, handleModalVisibility } = handlers;
 	const [currentRagload, setCurrentRagload] = React.useState<Ragload>({
 		vendor: "",
 		weight: 0,
@@ -36,7 +35,7 @@ function RagloadEntry({ handlers, screenState }) {
 			typeof currentRagload.weight
 		);
 		handleAddRagload(currentRagload);
-		setScreen(0);
+		handleModalVisibility();
 	}
 
 	return (

@@ -17,7 +17,11 @@ function DisplayViewer({ ragloadState, screenState, handlers }) {
 	switch (screen) {
 		case 0:
 			display = (
-				<MonthView ragloadState={ragloadState} screenState={screenState} />
+				<MonthView
+					ragloadState={ragloadState}
+					screenState={screenState}
+					handlers={handlers}
+				/>
 			);
 			break;
 		case 1:

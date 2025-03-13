@@ -11,17 +11,13 @@ import Modal from "../../components/Modal/Modal";
 import RagloadEntry from "../../components/RagloadEntry/RagloadEntry";
 // @ts-ignore
 
-function MonthView({ ragloadState, screenState }) {
+function MonthView({ ragloadState, screenState, handlers }) {
 	const { ragloads, setRagloads } = ragloadState;
 	const { screen, setScreen } = screenState;
 
 	const [modalVisible, setModalVisible] = useState<Boolean>(false);
 
-	function fakeHander() {
-		return "handled";
-	}
-
-	function handleModalVisability() {
+	function handleModalVisibility() {
 		setModalVisible(!modalVisible);
 	}
 
@@ -42,15 +38,14 @@ function MonthView({ ragloadState, screenState }) {
 			<div id="month-view__tool-bar">
 				<Toolbar
 					modalVisibleState={{ modalVisible, setModalVisible }}
-					modalHandler={handleModalVisability}
+					modalHandler={handleModalVisibility}
 				/>
 			</div>
 			<Modal
 				modalContent={RagloadEntry}
 				modalVisibleState={{ modalVisible, setModalVisible }}
-				modalHandler={handleModalVisability}
+				handlers={{ ...handlers, handleModalVisibility }}
 			/>
-			{/* <RagloadEntry handlers={fakeHander} screenState={screenState} /> */}
 		</div>
 	);
 }
