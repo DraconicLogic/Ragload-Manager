@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Ragload } from "../../types";
 // @ts-ignore
-import Calendar from "react-calendar";
+import CalendarComponent from "../../components/Calendar/Calendar";
 import RagloadTable from "../../components/RagloadTable/RagloadTable";
 import CurrentMonthBar from "../../components/CurrentMonthBar/CurrentMonthBar";
 import CurrentDayBar from "../../components/CurrentDayBar/CurrentDayBar";
@@ -27,7 +26,7 @@ function MonthView({ ragloadState, screenState, handlers }) {
 				<CurrentMonthBar screenState={{ screen, setScreen }} />
 			</div>
 			<div id="month-view__calendar-month">
-				<Calendar />
+				<CalendarComponent ragloads={ragloads} />
 			</div>
 			<div id="month-view__current-day-bar">
 				<CurrentDayBar />
