@@ -1,5 +1,5 @@
 import weekOfYear from "dayjs/plugin/weekOfYear";
-import { WeekRagloads, RagloadDays } from "./types";
+import { WeekRagloads, RagloadDays, Ragload } from "./types";
 const dayjs = require("dayjs");
 dayjs.extend(weekOfYear);
 
@@ -117,6 +117,25 @@ export function getProcessedDateRange(ragloadDays: RagloadDays) {
 	range.from = dayjs(range.from).format("DD/MM");
 	range.to = dayjs(range.to).format("DD/MM");
 	return range;
+}
+
+export function groupRagloadsByDate(ragloads: Ragload[]): Record<number, Record<string, Record<number, Ragload[]>>> {
+  return ragloads.reduce((acc, ragload) => {
+      if (!ragload.deliveryDate) return acc;
+      
+      const date = new Date(ragload.deliveryDate);
+      const year = date.getFullYear();
+      const month = date.toLocaleString('en-US', { month: 'long' });
+      const day = date.getDate();
+      
+      if (!acc[year]) acc[year] = {};
+      if (!acc[year][month]) acc[year][month] = {};
+      if (!acc[year][month][day]) acc[year][month][day] = [];
+      
+      acc[year][month][day].push(ragload);
+      
+      return acc;
+  }, {} as Record<number, Record<string, Record<number, Ragload[]>>>);
 }
 
 // export function getProcessedWeekRagloadYear(ragloadDays: RagloadDays):string {

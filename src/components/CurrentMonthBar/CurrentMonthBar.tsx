@@ -1,12 +1,25 @@
 import React from "react";
 
-function CurrentMonthBar({ screenState }) {
+function CurrentMonthBar({ ragloads, selectedDate, screenState }) {
 	const { screen, setScreen } = screenState;
 
-	// temporary variables
-	let month = "March ";
-	let year = " 2025";
-	let ragloadMonthWeight = "50000";
+	if (!selectedDate) return null;
+
+	const selectedMonth = selectedDate.getMonth();
+	const selectedYear = selectedDate.getFullYear();
+
+	const monthWeight = ragloads
+		.filter((r) => {
+			const date = new Date(r.deliveryDate);
+			return (
+				date.getMonth() === selectedMonth && date.getFullYear() === selectedYear
+			);
+		})
+		.reduce((sum, r) => sum + r.weight, 0);
+
+	const monthName = selectedDate.toLocaleDateString("en-US", {
+		month: "long",
+	});
 
 	function switchToYearView() {
 		setScreen(1);
@@ -20,13 +33,9 @@ function CurrentMonthBar({ screenState }) {
 				{"<"}
 			</div>
 			<div>
-				{month}
-				{year}
+				{monthName} {selectedYear}
 			</div>
-			<div>
-				{"Ragloads: "}
-				{ragloadMonthWeight} kg{" "}
-			</div>
+			<div>Ragloads: {monthWeight} kg</div>
 		</div>
 	);
 }

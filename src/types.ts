@@ -5,6 +5,7 @@ export interface Ragload {
 	deliveryDate: string;
 	sortedDate?: string | null;
 	sortingStartDate?: string | null;
+	rating?: number | null;
 }
 
 export interface WeekRagloads {

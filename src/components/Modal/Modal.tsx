@@ -1,9 +1,18 @@
 import React from "react";
-
+import RagloadEntry from "../RagloadEntry/RagloadEntry";
+import RagloadCardMenu from "../RagloadCardMenu/RagloadCardMenu";
+// TODO: Import the RagloadCardMenu and RagloadEntry components into Modal.tsx. Conditionally render the correct modal content based on where it's opened.
 function Modal({ modalContent, modalVisibleState, handlers }) {
-	const { handleModalVisibility, handleAddRagload } = handlers;
+	const { handleModalVisibility } = handlers;
 	const { modalVisible } = modalVisibleState;
-	const Content = modalContent;
+
+	function renderContent(contentString) {
+		const contentObject = {
+			RagloadEntry: <RagloadEntry handlers={handlers} />,
+			RagloadCardMenu: <RagloadCardMenu />,
+		};
+		return contentObject[contentString];
+	}
 
 	const isModalVisible = modalVisible ? "modal-revealed" : "modal-hidden";
 	// Consider importing Ragload Entry form into this component instead of passing through props.
@@ -13,7 +22,7 @@ function Modal({ modalContent, modalVisibleState, handlers }) {
 				<span className="close" onClick={handleModalVisibility}>
 					&times;
 				</span>
-				<Content handlers={handlers} />
+				{renderContent(modalContent)}
 			</div>
 		</div>
 	);

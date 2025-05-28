@@ -1,15 +1,11 @@
 import React from "react";
 // @ts-ignore
-import DeliveredRagloads from "../DeliveredRagloads/DeliveredRagloads.tsx";
-// @ts-ignore
-import SortedRagloads from "../SortedRagloads/SortedRagloads.tsx";
-// @ts-ignore
 import RagloadEntry from "../RagloadEntry/RagloadEntry.tsx";
 // @ts-ignore
-import MonthView from "../../views/MonthView/MonthView";
+import CalendarView from "../../views/CalendarView/CalendarView";
 // @ts-ignore
 import YearView from "../../views/YearView/YearView";
-
+// TODO: Check if this component is needed. Instead of this component it might make sense to render CalendarView directly
 function DisplayViewer({ ragloadState, screenState, handlers }) {
 	let display;
 
@@ -17,7 +13,7 @@ function DisplayViewer({ ragloadState, screenState, handlers }) {
 	switch (screen) {
 		case 0:
 			display = (
-				<MonthView
+				<CalendarView
 					ragloadState={ragloadState}
 					screenState={screenState}
 					handlers={handlers}

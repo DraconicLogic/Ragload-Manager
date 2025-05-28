@@ -28,6 +28,16 @@
 	font-size: xx-large;
 }
 
+.calendar__ragload-marker {
+	display: block;
+  width: 6px;
+  height: 6px;
+  background-color: grey;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 2px;
+}
+
 #month-view {
 	display: grid;
 	grid-template-rows: 1fr 3fr 1fr 5fr 1fr;

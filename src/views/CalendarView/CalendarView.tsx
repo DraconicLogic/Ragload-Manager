@@ -7,41 +7,53 @@ import CurrentMonthBar from "../../components/CurrentMonthBar/CurrentMonthBar";
 import CurrentDayBar from "../../components/CurrentDayBar/CurrentDayBar";
 import Toolbar from "../../components/Toolbar/Toolbar";
 import Modal from "../../components/Modal/Modal";
-import RagloadEntry from "../../components/RagloadEntry/RagloadEntry";
+
 // @ts-ignore
 
-function MonthView({ ragloadState, screenState, handlers }) {
-	const { ragloads, setRagloads } = ragloadState;
+function CalendarView({ ragloadState, screenState, handlers }) {
+	const { ragloads } = ragloadState;
 	const { screen, setScreen } = screenState;
 
 	const [modalVisible, setModalVisible] = useState<Boolean>(false);
-
-	function handleModalVisibility() {
+	const [modalContent, setModalContent] = useState("");
+	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+	console.log(selectedDate);
+	function handleModalVisibility(content) {
+		if (content) {
+			setModalContent(content);
+		} else {
+			setModalContent("");
+		}
 		setModalVisible(!modalVisible);
 	}
 
 	return (
 		<div id="month-view">
 			<div id="month-view__current-month-bar">
-				<CurrentMonthBar screenState={{ screen, setScreen }} />
-			</div>
-			<div id="month-view__calendar-month">
-				<CalendarComponent ragloads={ragloads} />
-			</div>
-			<div id="month-view__current-day-bar">
-				<CurrentDayBar />
-			</div>
-			<div id="month-view__ragload-table">
-				<RagloadTable ragloads={ragloads} handleRagload={null} />
-			</div>
-			<div id="month-view__tool-bar">
-				<Toolbar
-					modalVisibleState={{ modalVisible, setModalVisible }}
-					modalHandler={handleModalVisibility}
+				<CurrentMonthBar
+					screenState={{ screen, setScreen }}
+					ragloads={ragloads}
+					selectedDate={selectedDate}
 				/>
 			</div>
+			<div id="month-view__calendar-month">
+				<CalendarComponent ragloads={ragloads} onDateChange={setSelectedDate} />
+			</div>
+			<div id="month-view__current-day-bar">
+				<CurrentDayBar ragloads={ragloads} selectedDate={selectedDate} />
+			</div>
+			<div id="month-view__ragload-table">
+				<RagloadTable
+					ragloads={ragloads}
+					handleRagload={null}
+					selectedDate={selectedDate}
+				/>
+			</div>
+			<div id="month-view__tool-bar">
+				<Toolbar modalHandler={handleModalVisibility} />
+			</div>
 			<Modal
-				modalContent={RagloadEntry}
+				modalContent={modalContent}
 				modalVisibleState={{ modalVisible, setModalVisible }}
 				handlers={{ ...handlers, handleModalVisibility }}
 			/>
@@ -49,4 +61,4 @@ function MonthView({ ragloadState, screenState, handlers }) {
 	);
 }
 
-export default MonthView;
+export default CalendarView;
