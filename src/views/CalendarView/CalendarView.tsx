@@ -47,6 +47,7 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 					ragloads={ragloads}
 					handleRagload={null}
 					selectedDate={selectedDate}
+					handleModal={handleModalVisibility}
 				/>
 			</div>
 			<div id="month-view__tool-bar">

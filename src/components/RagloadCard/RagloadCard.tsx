@@ -4,7 +4,7 @@ import { formatISOString } from "../../utils";
 // @ts-ignore
 import RagloadCardOptions from "../RagloadCardOptions/RagloadCardOptions.tsx";
 
-function RagloadCard({ ragload, handleRagload }) {
+function RagloadCard({ ragload, handleRagload, handleModal }) {
 	const { vendor, ticketNumber, weight, deliveryDate } = ragload;
 	const [showOptions, setShowOptions] = React.useState(false);
 
@@ -20,7 +20,7 @@ function RagloadCard({ ragload, handleRagload }) {
 				<td>{weight}</td>
 				<td>{formatISOString(deliveryDate)}</td>
 				<td
-					onClick={toggleOptions}
+					onClick={() => handleModal("RagloadCardMenu")}
 					className="ragload-card__option-toggle"
 					title="More options">
 					⋮

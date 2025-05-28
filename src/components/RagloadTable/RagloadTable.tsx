@@ -4,7 +4,7 @@ import { Ragload } from "../../types";
 import RagloadCard from "../RagloadCard/RagloadCard.tsx";
 import * as utils from "../../utils";
 
-function RagloadTable({ ragloads, handleRagload, selectedDate }) {
+function RagloadTable({ ragloads, handleRagload, selectedDate, handleModal }) {
 	const filteredRagloads = selectedDate
 		? ragloads.filter((ragload) => {
 				const deliveryDate = new Date(ragload.deliveryDate);
@@ -19,6 +19,7 @@ function RagloadTable({ ragloads, handleRagload, selectedDate }) {
 					<RagloadCard
 						ragload={ragload}
 						handleRagload={handleRagload}
+						handleModal={handleModal}
 						key={index}
 					/>
 				);
