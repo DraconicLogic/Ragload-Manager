@@ -6,7 +6,6 @@ import RagloadTable from "../../components/RagloadTable/RagloadTable";
 import CurrentMonthBar from "../../components/CurrentMonthBar/CurrentMonthBar";
 import CurrentDayBar from "../../components/CurrentDayBar/CurrentDayBar";
 import Toolbar from "../../components/Toolbar/Toolbar";
-import Modal from "../../components/Modal/Modal";
 
 // @ts-ignore
 
@@ -14,18 +13,8 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 	const { ragloads } = ragloadState;
 	const { screen, setScreen } = screenState;
 
-	const [modalVisible, setModalVisible] = useState<Boolean>(false);
-	const [modalContent, setModalContent] = useState("");
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 	console.log(selectedDate);
-	function handleModalVisibility(content) {
-		if (content) {
-			setModalContent(content);
-		} else {
-			setModalContent("");
-		}
-		setModalVisible(!modalVisible);
-	}
 
 	return (
 		<div id="month-view">
@@ -47,17 +36,11 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 					ragloads={ragloads}
 					handleRagload={null}
 					selectedDate={selectedDate}
-					handleModal={handleModalVisibility}
 				/>
 			</div>
 			<div id="month-view__tool-bar">
-				<Toolbar modalHandler={handleModalVisibility} />
+				<Toolbar handlers={handlers} />
 			</div>
-			<Modal
-				modalContent={modalContent}
-				modalVisibleState={{ modalVisible, setModalVisible }}
-				handlers={{ ...handlers, handleModalVisibility }}
-			/>
 		</div>
 	);
 }

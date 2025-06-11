@@ -1,43 +1,47 @@
-import * as React from "react";
-// @ts-ignore
+import React, { useState, Fragment } from "react";
+import RagloadCardMenu from "../RagloadCardMenu/RagloadCardMenu";
+import Modal from "../Modal/Modal";
 import { formatISOString } from "../../utils";
-// @ts-ignore
-import RagloadCardOptions from "../RagloadCardOptions/RagloadCardOptions.tsx";
 
-function RagloadCard({ ragload, handleRagload, handleModal }) {
+function RagloadCard({ ragload, handleRagload }) {
 	const { vendor, ticketNumber, weight, deliveryDate } = ragload;
-	const [showOptions, setShowOptions] = React.useState(false);
+	const [showMenu, setShowMenu] = useState<Boolean>(false);
 
-	function toggleOptions() {
-		setShowOptions(!showOptions);
+	function handleModalVisibility() {
+		setShowMenu(!showMenu);
 	}
 
-	function displayCard() {
-		return (
+	// TODO: Remove the RagloadCardOptions. We are going to use a pop up menu on a modal
+	return (
+		<Fragment>
 			<tr className="ragload-card">
 				<td>{ticketNumber}</td>
 				<td>{vendor}</td>
 				<td>{weight}</td>
 				<td>{formatISOString(deliveryDate)}</td>
 				<td
-					onClick={() => handleModal("RagloadCardMenu")}
+					onClick={() => handleModalVisibility()}
 					className="ragload-card__option-toggle"
 					title="More options">
 					⋮
 				</td>
 			</tr>
-		);
-	}
-	// TODO: Remove the RagloadCardOptions. We are going to use a pop up menu on a modal
-	return showOptions ? (
-		<RagloadCardOptions
-			handleRagload={handleRagload}
-			optionsState={{ showOptions, setShowOptions }}
-			ragload={ragload}
-		/>
-	) : (
-		displayCard()
+
+			<Modal isOpen={showMenu} onClose={() => setShowMenu(false)}>
+				<RagloadCardMenu />
+			</Modal>
+		</Fragment>
 	);
+
+	// return showOptions ? (
+	// 	<RagloadCardOptions
+	// 		handleRagload={handleRagload}
+	// 		optionsState={{ showOptions, setShowOptions }}
+	// 		ragload={ragload}
+	// 	/>
+	// ) : (
+	// 	displayCard()
+	// );
 }
 
 export default RagloadCard;

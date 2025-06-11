@@ -30,12 +30,12 @@
 
 .calendar__ragload-marker {
 	display: block;
-  width: 6px;
-  height: 6px;
-  background-color: grey;
-  border-radius: 50%;
-  margin: auto;
-  margin-top: 2px;
+	width: 6px;
+	height: 6px;
+	background-color: grey;
+	border-radius: 50%;
+	margin: auto;
+	margin-top: 2px;
 }
 
 #month-view {
@@ -112,6 +112,7 @@
 	padding: 20px;
 	border: 1px solid #888;
 	width: 80%;
+	position: relative;
 }
 
 .close {

@@ -1,10 +1,11 @@
-// TODO: I Want this screen when closed to return to the previous screen.
+// TODO: I want the curent date and time displayed. W
 
 import * as React from "react";
 import { Ragload } from "../../types";
 
 function RagloadEntry({ handlers }) {
 	const { handleAddRagload, handleModalVisibility } = handlers;
+	console.log(handlers);
 	const [currentRagload, setCurrentRagload] = React.useState<Ragload>({
 		vendor: "",
 		weight: 0,
@@ -37,7 +38,7 @@ function RagloadEntry({ handlers }) {
 		handleAddRagload(currentRagload);
 		handleModalVisibility();
 	}
-
+	// TODO: change the id="RagloadEntry__form" into the current date display
 	return (
 		<div id="RagloadEntry">
 			<h1>Ragload Entry</h1>
