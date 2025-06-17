@@ -11,10 +11,11 @@ function RagloadCard({ ragload, handleRagload }) {
 		setShowMenu(!showMenu);
 	}
 
-	// TODO: Remove the RagloadCardOptions. We are going to use a pop up menu on a modal
 	return (
 		<Fragment>
-			<tr className="ragload-card">
+			<tr
+				className="ragload-card"
+				id={showMenu ? "ragload-card--selected" : null}>
 				<td>{ticketNumber}</td>
 				<td>{vendor}</td>
 				<td>{weight}</td>
@@ -32,16 +33,6 @@ function RagloadCard({ ragload, handleRagload }) {
 			</Modal>
 		</Fragment>
 	);
-
-	// return showOptions ? (
-	// 	<RagloadCardOptions
-	// 		handleRagload={handleRagload}
-	// 		optionsState={{ showOptions, setShowOptions }}
-	// 		ragload={ragload}
-	// 	/>
-	// ) : (
-	// 	displayCard()
-	// );
 }
 
 export default RagloadCard;

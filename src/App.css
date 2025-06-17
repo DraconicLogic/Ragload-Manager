@@ -173,6 +173,23 @@
 	font-size: xx-large;
 }
 
+#ragload-card--selected {
+	background-color: steelblue;
+}
+
+.ragload-card__menu {
+	display: flex;
+	flex-direction: column;
+}
+
+.ragload-card__menu__item {
+	border: solid;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
 .ragload-table {
 	margin: auto;
 }
