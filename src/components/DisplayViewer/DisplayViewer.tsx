@@ -8,7 +8,7 @@ import YearView from "../../views/YearView/YearView";
 // TODO: Check if this component is needed. Instead of this component it might make sense to render CalendarView directly
 function DisplayViewer({ ragloadState, screenState, handlers }) {
 	let display;
-
+	console.log("handlers in DisplayViewer", handlers);
 	const { screen } = screenState;
 	switch (screen) {
 		case 0:

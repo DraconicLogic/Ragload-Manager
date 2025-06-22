@@ -1,10 +1,9 @@
-import * as React from "react";
 import { Ragload } from "../../types";
 // @ts-ignore
 import RagloadCard from "../RagloadCard/RagloadCard.tsx";
 import * as utils from "../../utils";
 
-function RagloadTable({ ragloads, handleRagload, selectedDate }) {
+function RagloadTable({ ragloads, handlers, selectedDate }) {
 	const filteredRagloads = selectedDate
 		? ragloads.filter((ragload) => {
 				const deliveryDate = new Date(ragload.deliveryDate);
@@ -16,11 +15,7 @@ function RagloadTable({ ragloads, handleRagload, selectedDate }) {
 		return ragloads
 			.map((ragload, index) => {
 				return (
-					<RagloadCard
-						ragload={ragload}
-						handleRagload={handleRagload}
-						key={index}
-					/>
+					<RagloadCard ragload={ragload} handlers={handlers} key={index} />
 				);
 			})
 			.reverse();

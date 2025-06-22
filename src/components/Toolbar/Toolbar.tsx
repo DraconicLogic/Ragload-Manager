@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
 import RagloadEntry from "../RagloadEntry/RagloadEntry";
 
-function Toolbar(handlers) {
+function Toolbar({ handlers }) {
 	const [showModal, setShowModal] = useState(false);
 
-	function handleModalVisibility() {
+	function handleModalVisibility(): void {
 		setShowModal(!showModal);
 	}
 
@@ -17,7 +17,10 @@ function Toolbar(handlers) {
 			</div>
 			<div>undefined</div>
 			<Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-				<RagloadEntry handlers={{ ...handlers, handleModalVisibility }} />
+				<RagloadEntry
+					ragload={null}
+					handlers={{ ...handlers, handleModalVisibility }}
+				/>
 			</Modal>
 		</div>
 	);

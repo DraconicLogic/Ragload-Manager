@@ -1,11 +1,30 @@
-// TODO: This component should be a popup menu
+import { useState, Fragment } from "react";
+import RagloadEntry from "../RagloadEntry/RagloadEntry";
+import Modal from "../Modal/Modal";
 
-function RagloadCardMenu() {
+function RagloadCardMenu({ ragload, handlers }) {
+	const [showModal, setShowModal] = useState(false);
+
+	function handleModalVisibility(): void {
+		setShowModal(!showModal);
+	}
 	return (
-		<div className="ragload-card__menu">
-			<div className="ragload-card__menu__item">edit Ragload</div>
-			<div className="ragload-card__menu__item">rate Ragload</div>
-		</div>
+		<Fragment>
+			<div className="ragload-card__menu">
+				<div
+					className="ragload-card__menu__item"
+					onClick={handleModalVisibility}>
+					edit Ragload
+				</div>
+				<div className="ragload-card__menu__item">rate Ragload</div>
+			</div>
+			<Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+				<RagloadEntry
+					ragload={ragload}
+					handlers={{ ...handlers, handleModalVisibility }}
+				/>
+			</Modal>
+		</Fragment>
 	);
 }
 

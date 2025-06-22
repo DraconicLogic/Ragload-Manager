@@ -1,13 +1,9 @@
-import React from "react";
 import { useState } from "react";
-// @ts-ignore
 import CalendarComponent from "../../components/Calendar/Calendar";
 import RagloadTable from "../../components/RagloadTable/RagloadTable";
 import CurrentMonthBar from "../../components/CurrentMonthBar/CurrentMonthBar";
 import CurrentDayBar from "../../components/CurrentDayBar/CurrentDayBar";
 import Toolbar from "../../components/Toolbar/Toolbar";
-
-// @ts-ignore
 
 function CalendarView({ ragloadState, screenState, handlers }) {
 	const { ragloads } = ragloadState;
@@ -15,7 +11,7 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 	console.log(selectedDate);
-
+	console.log("handlers in CalendarView", handlers);
 	return (
 		<div id="month-view">
 			<div id="month-view__current-month-bar">
@@ -34,7 +30,7 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 			<div id="month-view__ragload-table">
 				<RagloadTable
 					ragloads={ragloads}
-					handleRagload={null}
+					handlers={handlers}
 					selectedDate={selectedDate}
 				/>
 			</div>

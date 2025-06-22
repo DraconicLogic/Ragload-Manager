@@ -1,9 +1,9 @@
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import RagloadCardMenu from "../RagloadCardMenu/RagloadCardMenu";
 import Modal from "../Modal/Modal";
 import { formatISOString } from "../../utils";
 
-function RagloadCard({ ragload, handleRagload }) {
+function RagloadCard({ ragload, handlers }) {
 	const { vendor, ticketNumber, weight, deliveryDate } = ragload;
 	const [showMenu, setShowMenu] = useState<Boolean>(false);
 
@@ -29,7 +29,10 @@ function RagloadCard({ ragload, handleRagload }) {
 			</tr>
 
 			<Modal isOpen={showMenu} onClose={() => setShowMenu(false)}>
-				<RagloadCardMenu />
+				<RagloadCardMenu
+					ragload={ragload}
+					handlers={{ ...handlers, handleModalVisibility }}
+				/>
 			</Modal>
 		</Fragment>
 	);

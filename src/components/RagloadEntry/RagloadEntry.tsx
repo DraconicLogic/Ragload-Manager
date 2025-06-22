@@ -1,16 +1,26 @@
-// TODO: I want the curent date and time displayed. W
+// TODO: I want the curent date and time displayed.
+// TODO: I want this component to take a ragload. If theres no ragload to take then it should still work with
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { Ragload } from "../../types";
 
-function RagloadEntry({ handlers }) {
-	const { handleAddRagload, handleModalVisibility } = handlers;
-	console.log(handlers);
-	const [currentRagload, setCurrentRagload] = React.useState<Ragload>({
+function RagloadEntry({ ragload, handlers }) {
+	console.log("Handlers in RagloadEntry", handlers);
+	const { handleAddRagload, handleUpdateRagload, handleModalVisibility } =
+		handlers;
+
+	const [currentRagload, setCurrentRagload] = useState<Ragload>({
 		vendor: "",
 		weight: 0,
 		ticketNumber: "",
 		deliveryDate: new Date().toISOString(),
+	});
+
+	useEffect(() => {
+		(function editRagload() {
+			const ragloadToEdit: Ragload = { ...ragload };
+			if (ragload) setCurrentRagload(ragloadToEdit);
+		})();
 	});
 
 	function handleRagloadEntry(event) {
@@ -27,6 +37,7 @@ function RagloadEntry({ handlers }) {
 	}
 
 	function handleSubmit(event) {
+		// TODO handle submision if updating a previously created Ragload
 		event.preventDefault();
 		currentRagload.weight = Number(currentRagload.weight);
 
@@ -35,8 +46,18 @@ function RagloadEntry({ handlers }) {
 			currentRagload.weight,
 			typeof currentRagload.weight
 		);
-		handleAddRagload(currentRagload);
+
+		if (ragload) {
+			const updatedRagloadObj = {
+				upddatedRagload: currentRagload,
+				previousRagload: ragload,
+			};
+			handleUpdateRagload(updatedRagloadObj);
+		} else {
+			handleAddRagload(currentRagload);
+		}
 		handleModalVisibility();
+		// TODO: Close modal after submision
 	}
 	// TODO: change the id="RagloadEntry__form" into the current date display
 	return (

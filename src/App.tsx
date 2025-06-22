@@ -1,10 +1,6 @@
-// import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
-// @ts-ignore
-import Navbar from "./components/Navbar/Navbar.tsx";
-// @ts-ignore
-import DisplayViewer from "./components/DisplayViewer/DisplayViewer.tsx";
+import DisplayViewer from "./components/DisplayViewer/DisplayViewer";
 // @ts-ignore
 import * as data from "./data.ts";
 import { Ragload } from "./types";
@@ -39,12 +35,14 @@ function App() {
 		setRagloads(updatedRagloads);
 	}
 
+	function handleUpdateRagload({ updatedRagload, previousRagload }): void {}
+
 	return (
 		<div className="App">
 			<DisplayViewer
 				screenState={{ screen, setScreen }}
 				ragloadState={{ ragloads, setRagloads }}
-				handlers={{ handleAddRagload }}
+				handlers={{ handleAddRagload, handleUpdateRagload }}
 			/>
 			{/* <Navbar screenState={{ screen, setScreen }} /> */}
 		</div>
