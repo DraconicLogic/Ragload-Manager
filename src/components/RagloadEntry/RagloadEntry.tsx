@@ -1,11 +1,11 @@
 // TODO: I want the curent date and time displayed.
 // TODO: I want this component to take a ragload. If theres no ragload to take then it should still work with
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Ragload } from "../../types";
+import { formatISOString } from "../../utils";
 
 function RagloadEntry({ ragload, handlers }) {
-	console.log("Handlers in RagloadEntry", handlers);
 	const { handleAddRagload, handleUpdateRagload, handleModalVisibility } =
 		handlers;
 
@@ -17,11 +17,15 @@ function RagloadEntry({ ragload, handlers }) {
 	});
 
 	useEffect(() => {
-		(function editRagload() {
+		(function initRagloadForEdit() {
 			const ragloadToEdit: Ragload = { ...ragload };
+
+			console.log("Ragload to edit", ragloadToEdit);
+			console.log("Current Ragload before prep:", currentRagload);
 			if (ragload) setCurrentRagload(ragloadToEdit);
+			console.log("Current Ragload after prep:", currentRagload);
 		})();
-	});
+	}, [ragload]);
 
 	function handleRagloadEntry(event) {
 		const { name, value } = event.target;
@@ -59,17 +63,25 @@ function RagloadEntry({ ragload, handlers }) {
 		handleModalVisibility();
 		// TODO: Close modal after submision
 	}
-	// TODO: change the id="RagloadEntry__form" into the current date display
+	// const defaultFormSelection = ragload ? ragload.vendor : "";
+
+	// const formAutofill = ragload ? {
+	// 	currentRagload
+	// } : null
 	return (
 		<div id="RagloadEntry">
 			<h1>Ragload Entry</h1>
-			<div id="RagloadEntry__hideArrow">⌄</div>
+			<div id="RagloadEntry__currrent-date">
+				{formatISOString(currentRagload.deliveryDate)}
+			</div>
 			<form id="RagloadEntry__form" onInput={handleRagloadEntry}>
 				<label>
 					Vendor :
 					{/* TODO: create custom input element that starts as text field and matches results in a select field */}
 					<select name="vendor" className="RagloadEntry__form__field">
-						<option></option>
+						<option defaultValue={currentRagload.vendor}>
+							{currentRagload.vendor}
+						</option>
 						<option value="UWT">UWT</option>
 						<option value="Kabir">Kabir</option>
 						<option value="John Rodgers">John Rodgers</option>
@@ -89,15 +101,22 @@ function RagloadEntry({ ragload, handlers }) {
 					<input
 						className="RagloadEntry__form__field"
 						name="ticketNumber"
-						type="text"></input>
+						type="text"
+						defaultValue={currentRagload.ticketNumber}></input>
 				</label>
 				<br />
 				<label>
 					Weight(kg) :
-					<input
-						className="RagloadEntry__form__field"
-						name="weight"
-						type="number"></input>
+					{/* NO. this solution doenst work. I need a input field with a default value that I can change. */}
+					{ragload ? (
+						<span>{currentRagload.weight}</span>
+					) : (
+						<input
+							className="RagloadEntry__form__field"
+							name="weight"
+							type="number"
+							defaultValue={currentRagload.weight}></input>
+					)}
 				</label>
 			</form>
 			<br />

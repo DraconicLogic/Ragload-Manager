@@ -147,10 +147,6 @@
 	font-size: x-large;
 }
 
-#RagloadEntry__hideArrow {
-	font-size: xx-large;
-}
-
 .ragload-entry {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
