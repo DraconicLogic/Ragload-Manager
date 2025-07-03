@@ -3,7 +3,8 @@ import RagloadCardMenu from "../RagloadCardMenu/RagloadCardMenu";
 import Modal from "../Modal/Modal";
 import { formatISOString } from "../../utils";
 
-function RagloadCard({ ragload, handlers }) {
+function RagloadCard({ ragload, handlers, key }) {
+	console.log("key", key);
 	const { vendor, ticketNumber, weight, deliveryDate } = ragload;
 	const [showMenu, setShowMenu] = useState<Boolean>(false);
 
@@ -32,6 +33,7 @@ function RagloadCard({ ragload, handlers }) {
 				<RagloadCardMenu
 					ragload={ragload}
 					handlers={{ ...handlers, handleModalVisibility }}
+					key={key}
 				/>
 			</Modal>
 		</Fragment>

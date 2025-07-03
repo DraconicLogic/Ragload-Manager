@@ -35,7 +35,47 @@ function App() {
 		setRagloads(updatedRagloads);
 	}
 
-	function handleUpdateRagload({ updatedRagload, previousRagload }): void {}
+	function handleUpdateRagload({
+		updatedRagload,
+		previousRagload,
+		previousRagloadIndex,
+	}): void {
+		/**
+		 * 	Copy Ragloads[]
+		 *  Find the initial ragload in the array of ragloads
+		 * 	Check that previous ragload is the same as entry in arry
+		 * 	Change the data of ragload
+		 * 	Put the updated ragload in the same position as the previous ragload
+		 * 	Remove the previous ragload from the ragload array.
+		 */
+		console.log("handleUpdateRagload Args");
+		console.log("updatedRagload: ", updatedRagload);
+		console.log("previousRagload", previousRagload);
+		console.log("previousRagloadIndex", previousRagloadIndex);
+
+		const ragloadsCopy = JSON.parse(JSON.stringify(ragloads));
+
+		const ragloadToEdit = ragloadsCopy[previousRagloadIndex];
+
+		const compareObject = {
+			originalRagload: previousRagload,
+			ragloadToEdit,
+		};
+
+		if (compareRagloads(compareObject)) {
+			ragloadsCopy.splice(previousRagloadIndex, 1, updatedRagload);
+			setRagloads(ragloadsCopy);
+		} else {
+			alert("The ragload doesn't appear to be in memory");
+		}
+
+		function compareRagloads({ originalRagload, ragloadToEdit }) {
+			return (
+				originalRagload.ticketNumber === ragloadToEdit.ticketNumber &&
+				originalRagload.deliveryDate === ragloadToEdit.deliveryDate
+			);
+		}
+	}
 
 	return (
 		<div className="App">

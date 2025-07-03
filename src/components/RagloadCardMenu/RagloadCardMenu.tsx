@@ -2,7 +2,7 @@ import { useState, Fragment } from "react";
 import RagloadEntry from "../RagloadEntry/RagloadEntry";
 import Modal from "../Modal/Modal";
 
-function RagloadCardMenu({ ragload, handlers }) {
+function RagloadCardMenu({ ragload, handlers, key }) {
 	const [showModal, setShowModal] = useState(false);
 
 	function handleModalVisibility(): void {
@@ -22,6 +22,7 @@ function RagloadCardMenu({ ragload, handlers }) {
 				<RagloadEntry
 					ragload={ragload}
 					handlers={{ ...handlers, handleModalVisibility }}
+					key={key}
 				/>
 			</Modal>
 		</Fragment>

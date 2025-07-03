@@ -20,6 +20,7 @@ function Toolbar({ handlers }) {
 				<RagloadEntry
 					ragload={null}
 					handlers={{ ...handlers, handleModalVisibility }}
+					key={null}
 				/>
 			</Modal>
 		</div>

@@ -139,7 +139,17 @@
 	border: dashed;
 }
 
+#RagloadEntry_current-date {
+	font-size: large;
+}
+
 #RagloadEntry__form {
+	text-align: left;
+}
+
+.RagloadEntry__form__field {
+	font-size: large;
+	width: 25%;
 }
 
 #RagloadEntry__form > label {

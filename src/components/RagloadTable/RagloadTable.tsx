@@ -1,6 +1,5 @@
 import { Ragload } from "../../types";
-// @ts-ignore
-import RagloadCard from "../RagloadCard/RagloadCard.tsx";
+import RagloadCard from "../RagloadCard/RagloadCard";
 import * as utils from "../../utils";
 
 function RagloadTable({ ragloads, handlers, selectedDate }) {
@@ -14,6 +13,7 @@ function RagloadTable({ ragloads, handlers, selectedDate }) {
 	function populateRagloads(ragloads: Ragload[]) {
 		return ragloads
 			.map((ragload, index) => {
+				console.log("populateRagloads() index: ", index);
 				return (
 					<RagloadCard ragload={ragload} handlers={handlers} key={index} />
 				);

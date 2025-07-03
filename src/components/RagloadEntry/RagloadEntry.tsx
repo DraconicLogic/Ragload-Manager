@@ -5,7 +5,8 @@ import { useState, useEffect, Fragment } from "react";
 import { Ragload } from "../../types";
 import { formatISOString } from "../../utils";
 
-function RagloadEntry({ ragload, handlers }) {
+function RagloadEntry({ ragload, handlers, key }) {
+	console.log("key", key);
 	const { handleAddRagload, handleUpdateRagload, handleModalVisibility } =
 		handlers;
 
@@ -17,17 +18,15 @@ function RagloadEntry({ ragload, handlers }) {
 	});
 
 	useEffect(() => {
+		console.log("Call initRagloadForEdit()");
 		(function initRagloadForEdit() {
 			const ragloadToEdit: Ragload = { ...ragload };
-
-			console.log("Ragload to edit", ragloadToEdit);
-			console.log("Current Ragload before prep:", currentRagload);
 			if (ragload) setCurrentRagload(ragloadToEdit);
-			console.log("Current Ragload after prep:", currentRagload);
 		})();
 	}, [ragload]);
 
 	function handleRagloadEntry(event) {
+		console.log("handling Ragload Entry");
 		const { name, value } = event.target;
 
 		const newRagload: Ragload = {
@@ -51,11 +50,19 @@ function RagloadEntry({ ragload, handlers }) {
 			typeof currentRagload.weight
 		);
 
+		console.log("Current Ragload: ", currentRagload);
+
 		if (ragload) {
+			console.log("Updating Ragload");
 			const updatedRagloadObj = {
-				upddatedRagload: currentRagload,
+				updatedRagload: currentRagload,
 				previousRagload: ragload,
+				// previousRagloadIndex: key,
 			};
+			// console.log(
+			// 	"updatedRagloadObj.key: ",
+			// 	updatedRagloadObj.previousRagloadIndex
+			// );
 			handleUpdateRagload(updatedRagloadObj);
 		} else {
 			handleAddRagload(currentRagload);
@@ -107,16 +114,11 @@ function RagloadEntry({ ragload, handlers }) {
 				<br />
 				<label>
 					Weight(kg) :
-					{/* NO. this solution doenst work. I need a input field with a default value that I can change. */}
-					{ragload ? (
-						<span>{currentRagload.weight}</span>
-					) : (
-						<input
-							className="RagloadEntry__form__field"
-							name="weight"
-							type="number"
-							defaultValue={currentRagload.weight}></input>
-					)}
+					<input
+						className="RagloadEntry__form__field"
+						name="weight"
+						type="number"
+						value={currentRagload.weight}></input>
 				</label>
 			</form>
 			<br />
