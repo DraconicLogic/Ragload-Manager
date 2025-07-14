@@ -1,7 +1,7 @@
 // TODO: I want the curent date and time displayed.
 // TODO: I want this component to take a ragload. If theres no ragload to take then it should still work with
 
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect } from "react";
 import { Ragload } from "../../types";
 import { formatISOString } from "../../utils";
 

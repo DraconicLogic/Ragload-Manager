@@ -35,11 +35,7 @@ function App() {
 		setRagloads(updatedRagloads);
 	}
 
-	function handleUpdateRagload({
-		updatedRagload,
-		previousRagload,
-		previousRagloadIndex,
-	}): void {
+	function handleUpdateRagload({ updatedRagload, previousRagload }): void {
 		/**
 		 * 	Copy Ragloads[]
 		 *  Find the initial ragload in the array of ragloads
@@ -48,14 +44,17 @@ function App() {
 		 * 	Put the updated ragload in the same position as the previous ragload
 		 * 	Remove the previous ragload from the ragload array.
 		 */
-		console.log("handleUpdateRagload Args");
-		console.log("updatedRagload: ", updatedRagload);
-		console.log("previousRagload", previousRagload);
-		console.log("previousRagloadIndex", previousRagloadIndex);
 
 		const ragloadsCopy = JSON.parse(JSON.stringify(ragloads));
 
-		const ragloadToEdit = ragloadsCopy[previousRagloadIndex];
+		const ragloadIndex = ragloadsCopy.findIndex((ragload) => {
+			const query =
+				ragload.ticketNumber === previousRagload.ticketNumber &&
+				ragload.deliveryDate === previousRagload.deliveryDate;
+			return query;
+		});
+
+		const ragloadToEdit = ragloadsCopy[ragloadIndex];
 
 		const compareObject = {
 			originalRagload: previousRagload,
@@ -63,7 +62,7 @@ function App() {
 		};
 
 		if (compareRagloads(compareObject)) {
-			ragloadsCopy.splice(previousRagloadIndex, 1, updatedRagload);
+			ragloadsCopy.splice(ragloadIndex, 1, updatedRagload);
 			setRagloads(ragloadsCopy);
 		} else {
 			alert("The ragload doesn't appear to be in memory");
@@ -77,12 +76,57 @@ function App() {
 		}
 	}
 
+	function handleDeleteRagload({ condemnedRagload }): void {
+		console.log("RAGLOAD DELETED");
+		/**
+		 * when call put confirm() before running this handler
+		 *
+		 * Copy ragloads[] state
+		 * find condemnedRagload
+		 * Remove from ragloadCopy[]
+		 * update ragloads[] state with edited ragloadCopy[]
+		 */
+		const ragloadsCopy = JSON.parse(JSON.stringify(ragloads));
+		const ragloadIndex = ragloadsCopy.findIndex((ragload) => {
+			const query =
+				ragload.ticketNumber === condemnedRagload.ticketNumber &&
+				ragload.deliveryDate === condemnedRagload.deliveryDate;
+			return query;
+		});
+		const ragloadToDelete = ragloadsCopy[ragloadIndex];
+		const compareObject = {
+			originalRagload: condemnedRagload,
+			ragloadToDelete,
+		};
+
+		if (compareRagloads(compareObject)) {
+			alert(
+				`Ragload ${condemnedRagload.ticketNumber} brought by ${condemnedRagload.vendor} has been deleted`
+			);
+			ragloadsCopy.splice(ragloadIndex, 1);
+			setRagloads(ragloadsCopy);
+		} else {
+			alert("The ragload doesn't appear to be in memory");
+		}
+
+		function compareRagloads({ originalRagload, ragloadToDelete }) {
+			return (
+				originalRagload.ticketNumber === ragloadToDelete.ticketNumber &&
+				originalRagload.deliveryDate === ragloadToDelete.deliveryDate
+			);
+		}
+	}
+
 	return (
 		<div className="App">
 			<DisplayViewer
 				screenState={{ screen, setScreen }}
 				ragloadState={{ ragloads, setRagloads }}
-				handlers={{ handleAddRagload, handleUpdateRagload }}
+				handlers={{
+					handleAddRagload,
+					handleUpdateRagload,
+					handleDeleteRagload,
+				}}
 			/>
 			{/* <Navbar screenState={{ screen, setScreen }} /> */}
 		</div>

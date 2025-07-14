@@ -8,15 +8,27 @@ function RagloadCardMenu({ ragload, handlers, key }) {
 	function handleModalVisibility(): void {
 		setShowModal(!showModal);
 	}
+
+	function handleDeleteRagload() {
+		if (
+			window.confirm(
+				"Are you sure you want to delete this ragload? This action cannot be undone."
+			)
+		) {
+			handlers.handleDeleteRagload({ condemnedRagload: ragload });
+		}
+	}
 	return (
 		<Fragment>
 			<div className="ragload-card__menu">
 				<div
 					className="ragload-card__menu__item"
 					onClick={handleModalVisibility}>
-					edit Ragload
+					EDIT Ragload
 				</div>
-				<div className="ragload-card__menu__item">rate Ragload</div>
+				<div className="ragload-card__menu__item" onClick={handleDeleteRagload}>
+					DELETE Ragload
+				</div>
 			</div>
 			<Modal isOpen={showModal} onClose={() => setShowModal(false)}>
 				<RagloadEntry
