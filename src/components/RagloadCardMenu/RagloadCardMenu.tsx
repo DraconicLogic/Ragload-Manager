@@ -1,5 +1,6 @@
 import { useState, Fragment } from "react";
 import RagloadEntry from "../RagloadEntry/RagloadEntry";
+import Rating from "../Rating/Rating";
 import Modal from "../Modal/Modal";
 
 function RagloadCardMenu({ ragload, handlers, key }) {
@@ -21,6 +22,7 @@ function RagloadCardMenu({ ragload, handlers, key }) {
 	return (
 		<Fragment>
 			<div className="ragload-card__menu">
+				<Rating ragload={ragload} />
 				<div
 					className="ragload-card__menu__item"
 					onClick={handleModalVisibility}>
