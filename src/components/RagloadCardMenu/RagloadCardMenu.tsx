@@ -22,7 +22,7 @@ function RagloadCardMenu({ ragload, handlers, key }) {
 	return (
 		<Fragment>
 			<div className="ragload-card__menu">
-				<Rating ragload={ragload} />
+				<Rating ragload={ragload} handlers={handlers} />
 				<div
 					className="ragload-card__menu__item"
 					onClick={handleModalVisibility}>
