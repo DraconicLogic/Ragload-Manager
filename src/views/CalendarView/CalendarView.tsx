@@ -10,8 +10,6 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 	const { screen, setScreen } = screenState;
 
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-	console.log(selectedDate);
-	console.log("handlers in CalendarView", handlers);
 	return (
 		<div id="month-view">
 			<div id="month-view__current-month-bar">

@@ -1,4 +1,4 @@
-import React from "react";
+// Create Modal component with open and close tag. Make chosen modal content a child of this component
 
 function Modal({ isOpen, onClose, children }) {
 	if (!isOpen) return null;

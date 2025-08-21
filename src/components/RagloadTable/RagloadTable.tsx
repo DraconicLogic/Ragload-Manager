@@ -21,7 +21,6 @@ function RagloadTable({ ragloads, handlers, selectedDate }) {
 			.reverse();
 	}
 
-	console.log("Filtered Ragloads: ", filteredRagloads);
 	return (
 		<div>
 			{filteredRagloads.length === 0 ? (

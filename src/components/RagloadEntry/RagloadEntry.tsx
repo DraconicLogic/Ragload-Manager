@@ -1,12 +1,12 @@
-// TODO: I want the curent date and time displayed.
 // TODO: I want this component to take a ragload. If theres no ragload to take then it should still work with
 
 import { useState, useEffect } from "react";
 import { Ragload } from "../../types";
+import { getLocalVendors, addNewVendor } from "../../data";
 import { formatISOString } from "../../utils";
+import ComboBoxInput from "../ComboBoxInput/ComboBoxInput";
 
-function RagloadEntry({ ragload, handlers, key }) {
-	console.log("key", key);
+function RagloadEntry({ ragload, handlers }) {
 	const { handleAddRagload, handleUpdateRagload, handleModalVisibility } =
 		handlers;
 
@@ -17,17 +17,28 @@ function RagloadEntry({ ragload, handlers, key }) {
 		deliveryDate: new Date().toISOString(),
 	});
 
+	const [vendors, setVendors] = useState<string[]>([]);
+
 	useEffect(() => {
-		console.log("Call initRagloadForEdit()");
 		(function initRagloadForEdit() {
 			const ragloadToEdit: Ragload = { ...ragload };
 			if (ragload) setCurrentRagload(ragloadToEdit);
 		})();
 	}, [ragload]);
+	// DELETE AFTER EXTRACTION
+	useEffect(() => {
+		(function intiVendorList() {
+			const vendorList = getLocalVendors();
+			setVendors(vendorList);
+		})();
+	}, []);
 
 	function handleRagloadEntry(event) {
 		console.log("handling Ragload Entry");
+		console.log("Event: ", event);
 		const { name, value } = event.target;
+		console.log("Name: ", name);
+		console.log("Value: ", value);
 
 		const newRagload: Ragload = {
 			...currentRagload,
@@ -83,25 +94,15 @@ function RagloadEntry({ ragload, handlers, key }) {
 			</div>
 			<form id="RagloadEntry__form" onInput={handleRagloadEntry}>
 				<label>
-					Vendor :
-					{/* TODO: create custom input element that starts as text field and matches results in a select field */}
-					<select name="vendor" className="RagloadEntry__form__field">
-						<option defaultValue={currentRagload.vendor}>
-							{currentRagload.vendor}
-						</option>
-						<option value="UWT">UWT</option>
-						<option value="Kabir">Kabir</option>
-						<option value="John Rodgers">John Rodgers</option>
-						<option value="Abdul">Abdul</option>
-						<option value="Fountian">Fountian</option>
-						<option value="Yacine">Yacine</option>
-						<option value="Cash4Clothes">Cash4Clothes</option>
-						<option value="Uniform Exchange">Uniform Exchange</option>
-						<option value="British Heart Foundation">
-							British Heart Foundation
-						</option>
-					</select>
+					Vendor:
+					<ComboBoxInput
+						handleRagloadEntry={handleRagloadEntry}
+						currentVendor={currentRagload.vendor}
+					/>
 				</label>
+				{/* ------------------------------------------------------------------- */}
+
+				{/* ------------------------------------------------------------------- */}
 				<br />
 				<label>
 					Ticket Number :
