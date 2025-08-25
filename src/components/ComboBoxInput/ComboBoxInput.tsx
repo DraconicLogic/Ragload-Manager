@@ -1,5 +1,5 @@
 import { TextField, Autocomplete } from "@mui/material";
-import { getLocalVendors, addNewVendor } from "../../data";
+import { getLocalVendors } from "../../data";
 import { useState, useEffect } from "react";
 
 function ComboBoxInput({ handleRagloadEntry, currentVendor }) {
