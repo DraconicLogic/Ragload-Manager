@@ -31,7 +31,7 @@ const defaultVendors = [
 
 export function getLocalVendors(): string[] {
 	const localData = JSON.parse(localStorage.getItem(VENDOR_STORAGE_KEY));
-	return localData ? localData : defaultVendors;
+	return (localData ? localData : defaultVendors) as string[];
 }
 
 export function addNewVendor(newVendor: string): void {

@@ -1,4 +1,4 @@
-import React from "react";
+import Menu from "../Menu/Menu";
 
 function CurrentMonthBar({ ragloads, selectedDate, screenState }) {
 	const { screen, setScreen } = screenState;
@@ -29,8 +29,9 @@ function CurrentMonthBar({ ragloads, selectedDate, screenState }) {
 		<div id="current-month-bar">
 			<div
 				id="current-month-bar__switch-to-year-view"
-				onClick={switchToYearView}>
-				{"<"}
+				// onClick={switchToYearView}
+			>
+				<Menu />
 			</div>
 			<div>
 				{monthName} {selectedYear}
