@@ -13,11 +13,7 @@ function CalendarView({ ragloadState, screenState, handlers }) {
 	return (
 		<div id="month-view">
 			<div id="month-view__current-month-bar">
-				<CurrentMonthBar
-					screenState={{ screen, setScreen }}
-					ragloads={ragloads}
-					selectedDate={selectedDate}
-				/>
+				<CurrentMonthBar ragloads={ragloads} selectedDate={selectedDate} />
 			</div>
 			<div id="month-view__calendar-month">
 				<CalendarComponent ragloads={ragloads} onDateChange={setSelectedDate} />
