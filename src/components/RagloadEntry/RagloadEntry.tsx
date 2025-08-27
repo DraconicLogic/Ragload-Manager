@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Ragload } from "../../types";
-import { getLocalVendors, addNewVendor } from "../../data";
 import { formatISOString } from "../../utils";
 import ComboBoxInput from "../ComboBoxInput/ComboBoxInput";
 
@@ -17,35 +16,19 @@ function RagloadEntry({ ragload, handlers }) {
 		deliveryDate: new Date().toISOString(),
 	});
 
-	const [vendors, setVendors] = useState<string[]>([]);
-
 	useEffect(() => {
-		(function initRagloadForEdit() {
+		(function initialiseRagloadForEdit() {
 			const ragloadToEdit: Ragload = { ...ragload };
 			if (ragload) setCurrentRagload(ragloadToEdit);
 		})();
 	}, [ragload]);
-	// DELETE AFTER EXTRACTION
-	useEffect(() => {
-		(function intiVendorList() {
-			const vendorList = getLocalVendors();
-			setVendors(vendorList);
-		})();
-	}, []);
 
 	function handleRagloadEntry(event) {
-		console.log("handling Ragload Entry");
-		console.log("Event: ", event);
 		const { name, value } = event.target;
-		console.log("Name: ", name);
-		console.log("Value: ", value);
 
 		const newRagload: Ragload = {
 			...currentRagload,
 		};
-
-		console.log(currentRagload);
-
 		newRagload[name] = value;
 		setCurrentRagload(newRagload);
 	}
@@ -81,11 +64,7 @@ function RagloadEntry({ ragload, handlers }) {
 		handleModalVisibility();
 		// TODO: Close modal after submision
 	}
-	// const defaultFormSelection = ragload ? ragload.vendor : "";
 
-	// const formAutofill = ragload ? {
-	// 	currentRagload
-	// } : null
 	return (
 		<div id="RagloadEntry">
 			<h1>Ragload Entry</h1>
@@ -100,9 +79,6 @@ function RagloadEntry({ ragload, handlers }) {
 						currentVendor={currentRagload.vendor}
 					/>
 				</label>
-				{/* ------------------------------------------------------------------- */}
-
-				{/* ------------------------------------------------------------------- */}
 				<br />
 				<label>
 					Ticket Number :
