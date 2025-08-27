@@ -204,15 +204,42 @@
 	margin: auto;
 }
 
-.settings__feature {
+.settings__section {
+	border-top: solid thin;
+	border-bottom: solid thin;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+#settings__vendors {
+	display: grid;
+	grid-template-columns: 2fr 2fr;
+}
+
+.settings__section-title {
+	text-align: left;
+}
+
+.settings__vendors-list {
 	border: solid;
 }
 
-.settings__vendors__list-item {
+.settings__vendors-controls {
+}
+.settings__vendors-controls__button {
+	font-size: xx-large;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
-.settings__vendors__list-item--selected {
+.settings__vendors__list-item {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+#settings__vendors__list-item--selected {
 	border: dotted;
+	background-color: steelblue;
 }
 
 #sorted-ragloads__week-nav {

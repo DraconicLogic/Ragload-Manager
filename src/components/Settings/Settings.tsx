@@ -9,20 +9,29 @@ function Settings() {
 		<div>
 			<h2>Settings</h2>
 
-			<h3>Vendors</h3>
-			<div id="settings__vendors" className="settings__feature">
-				<div>
+			<h3 className="settings__section-title">Vendors</h3>
+			<div id="settings__vendors" className="settings__section">
+				<div className="settings__vendors-list">
 					{vendors.map((vendor) => {
 						const selectedStatus =
 							selectedVendor === vendor
 								? "settings__vendors__list-item--selected"
-								: "settings__vendors__list-item";
+								: null;
 						return (
-							<div className={selectedStatus} key={vendor}>
+							<div
+								className="settings__vendors__list-item"
+								id={selectedStatus}
+								key={vendor}
+								onClick={() => setSelectedVendor(vendor)}>
 								{vendor}
 							</div>
 						);
 					})}
+				</div>
+				<div className="settings__vendors-controls">
+					<button className="settings__vendors-controls__button">EDIT</button>
+					<button className="settings__vendors-controls__button">ADD</button>
+					<button className="settings__vendors-controls__button">REMOVE</button>
 				</div>
 			</div>
 		</div>
