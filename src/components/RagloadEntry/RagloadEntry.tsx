@@ -15,13 +15,13 @@ function RagloadEntry({ ragload, handlers }) {
 	});
 
 	useEffect(() => {
-		(function initialiseRagloadForEdit() {
+		(function initialiseRagloadForEdit(): void {
 			const ragloadToEdit: Ragload = { ...ragload };
 			if (ragload) setCurrentRagload(ragloadToEdit);
 		})();
 	}, [ragload]);
 
-	function handleRagloadEntry(event) {
+	function handleRagloadEntry(event): void {
 		const { name, value } = event.target;
 
 		const newRagload: Ragload = {
@@ -31,7 +31,7 @@ function RagloadEntry({ ragload, handlers }) {
 		setCurrentRagload(newRagload);
 	}
 
-	function handleSubmit(event) {
+	function handleSubmit(event): void {
 		event.preventDefault();
 		currentRagload.weight = Number(currentRagload.weight);
 
