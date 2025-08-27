@@ -1,5 +1,3 @@
-// TODO: I want this component to take a ragload. If theres no ragload to take then it should still work with
-
 import { useState, useEffect } from "react";
 import { Ragload } from "../../types";
 import { formatISOString } from "../../utils";
@@ -34,35 +32,19 @@ function RagloadEntry({ ragload, handlers }) {
 	}
 
 	function handleSubmit(event) {
-		// TODO handle submision if updating a previously created Ragload
 		event.preventDefault();
 		currentRagload.weight = Number(currentRagload.weight);
 
-		console.log(
-			"Current Ragload Weight: ",
-			currentRagload.weight,
-			typeof currentRagload.weight
-		);
-
-		console.log("Current Ragload: ", currentRagload);
-
 		if (ragload) {
-			console.log("Updating Ragload");
 			const updatedRagloadObj = {
 				updatedRagload: currentRagload,
 				previousRagload: ragload,
-				// previousRagloadIndex: key,
 			};
-			// console.log(
-			// 	"updatedRagloadObj.key: ",
-			// 	updatedRagloadObj.previousRagloadIndex
-			// );
 			handleUpdateRagload(updatedRagloadObj);
 		} else {
 			handleAddRagload(currentRagload);
 		}
 		handleModalVisibility();
-		// TODO: Close modal after submision
 	}
 
 	return (
