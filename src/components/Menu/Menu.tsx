@@ -44,7 +44,7 @@ function Menu() {
 			display = menuList;
 			break;
 		case "settings":
-			display = Settings();
+			display = <Settings />;
 			break;
 		default:
 			display = null;

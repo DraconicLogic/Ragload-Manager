@@ -204,6 +204,17 @@
 	margin: auto;
 }
 
+.settings__feature {
+	border: solid;
+}
+
+.settings__vendors__list-item {
+}
+
+.settings__vendors__list-item--selected {
+	border: dotted;
+}
+
 #sorted-ragloads__week-nav {
 	border: solid;
 	/* Remove border when element is finished */
