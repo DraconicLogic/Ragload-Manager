@@ -225,11 +225,13 @@
 }
 
 .settings__vendors-controls {
+	padding: 0.5em;
 }
 .settings__vendors-controls__button {
 	font-size: xx-large;
 	margin-top: 1em;
 	margin-bottom: 1em;
+	width: 90%;
 }
 
 .settings__vendors__list-item {

@@ -6,6 +6,7 @@ export interface Ragload {
 	sortedDate?: string | null;
 	sortingStartDate?: string | null;
 	rating?: number | null;
+	notes?: string | null;
 }
 
 export interface WeekRagloads {

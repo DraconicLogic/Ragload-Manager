@@ -5,9 +5,8 @@ import CurrentMonthBar from "../../components/CurrentMonthBar/CurrentMonthBar";
 import CurrentDayBar from "../../components/CurrentDayBar/CurrentDayBar";
 import Toolbar from "../../components/Toolbar/Toolbar";
 
-function CalendarView({ ragloadState, screenState, handlers }) {
+function CalendarView({ ragloadState, handlers }) {
 	const { ragloads } = ragloadState;
-	const { screen, setScreen } = screenState;
 
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 	return (

@@ -14,7 +14,7 @@ function DisplayViewer({ ragloadState, screenState, handlers }) {
 			display = (
 				<CalendarView
 					ragloadState={ragloadState}
-					screenState={screenState}
+					// screenState={screenState}
 					handlers={handlers}
 				/>
 			);

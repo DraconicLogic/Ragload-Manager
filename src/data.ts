@@ -22,11 +22,14 @@ const defaultVendors = [
 	"UWT",
 	"Kabir",
 	"John Rodgers",
+	"Hobson",
 	"Fountain",
 	"Yacine",
 	"Cash4Clothes",
 	"Uniform Exchange",
-	"British Heart Foundation",
+	"Big Dave",
+	"Ahmed",
+	"New Vendor",
 ];
 
 export function getLocalVendors(): string[] {
@@ -40,6 +43,13 @@ export function addNewVendor(newVendor: string): void {
 		vendorsCopy.push(newVendor);
 		saveVendors(vendorsCopy);
 	}
+}
+
+export function removeVendor(condemnedVendor: string): void {
+	const vendorsCopy = getLocalVendors();
+	const vendorIndex = vendorsCopy.findIndex(() => condemnedVendor);
+	vendorsCopy.splice(vendorIndex, 1);
+	saveVendors(vendorsCopy);
 }
 
 function saveVendors(vendors: string[]): void {
