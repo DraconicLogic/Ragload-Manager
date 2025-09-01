@@ -143,8 +143,10 @@
 	border: dashed;
 }
 
-#RagloadEntry_current-date {
+#RagloadEntry__current-date {
 	font-size: large;
+	width: min-content;
+	margin-left: 35%;
 }
 
 #RagloadEntry__form {

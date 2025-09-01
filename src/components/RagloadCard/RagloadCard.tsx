@@ -2,6 +2,7 @@ import { useState, Fragment } from "react";
 import RagloadCardMenu from "../RagloadCardMenu/RagloadCardMenu";
 import Modal from "../Modal/Modal";
 import { formatISOString } from "../../utils";
+import SmallRating from "../SmallRating/SmallRating";
 
 function RagloadCard({ ragload, handlers, key }) {
 	console.log("key", key);
@@ -11,7 +12,7 @@ function RagloadCard({ ragload, handlers, key }) {
 	function handleModalVisibility() {
 		setShowMenu(!showMenu);
 	}
-
+	console.log("Ragload: ", ragload);
 	return (
 		<Fragment>
 			<tr
@@ -21,6 +22,9 @@ function RagloadCard({ ragload, handlers, key }) {
 				<td>{vendor}</td>
 				<td>{weight}</td>
 				<td>{formatISOString(deliveryDate)}</td>
+				<td>
+					<SmallRating ragload={ragload} />
+				</td>
 				<td
 					onClick={() => handleModalVisibility()}
 					className="ragload-card__option-toggle"

@@ -1,6 +1,7 @@
 import { Ragload } from "../../types";
 import RagloadCard from "../RagloadCard/RagloadCard";
 import * as utils from "../../utils";
+import StarsIcon from "@mui/icons-material/Stars";
 
 function RagloadTable({ ragloads, handlers, selectedDate }) {
 	const filteredRagloads = selectedDate
@@ -35,6 +36,9 @@ function RagloadTable({ ragloads, handlers, selectedDate }) {
 							<th>Vendor</th>
 							<th>Weight(kg)</th>
 							<th>Delivery Date</th>
+							<th>
+								<StarsIcon />
+							</th>
 						</tr>
 					</thead>
 					<tbody>{populateRagloads(filteredRagloads)}</tbody>

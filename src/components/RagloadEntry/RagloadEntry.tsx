@@ -50,7 +50,7 @@ function RagloadEntry({ ragload, handlers }) {
 	return (
 		<div id="RagloadEntry">
 			<h1>Ragload Entry</h1>
-			<div id="RagloadEntry__currrent-date">
+			<div id="RagloadEntry__current-date">
 				{formatISOString(currentRagload.deliveryDate)}
 			</div>
 			<form id="RagloadEntry__form" onInput={handleRagloadEntry}>

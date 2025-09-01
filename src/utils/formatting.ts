@@ -5,5 +5,5 @@ export function parseDate(dateString: string): string {
 }
 
 export function formatISOString(date: string): string {
-	return dayjs(date).format("HH:mm | DD/MM/YYYY");
+	return dayjs(date).format("HH:mm DD/MM/YYYY");
 }
